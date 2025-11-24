@@ -31,17 +31,7 @@
       content="https://jrobertson-joiners.co.uk/i/logo-16x9.png"
     />
     <title>Jamie Robertson Joiners &amp; Building Contractor | Stirling &amp; Central Scotland</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="apple-touch-icon" sizes="180x180" href="i/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="i/android-chrome-192x192.png">
     <link rel="icon" href="i/favicon.ico">
@@ -193,7 +183,10 @@
       <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
         <a href="#home" class="text-lg md:text-xl font-semibold text-slate-900 flex items-center gap-2"
           >
-          <img src="i/logo.png" alt="Jamie Robertson Joiners and Building Contractor Logo" width="40" height="40" class="h-10 w-auto" />
+          <picture>
+            <source srcset="i/logo.webp" type="image/webp">
+            <img src="i/logo.png" alt="Jamie Robertson Joiners and Building Contractor Logo" width="40" height="40" class="h-10 w-auto" fetchpriority="high" />
+          </picture>
           <span>Jamie Robertson <span class="text-[var(--accent-wood)]">Joiners<span class="hidden md:inline"> &amp; Building Contractor</span></span></span>
         </a
         >
@@ -520,20 +513,17 @@
             </p>
           </div>
           <div class="relative h-64 lg:h-auto rounded-2xl overflow-hidden shadow-xl">
-            <img 
-                src="https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=800&auto=format&fit=crop" 
-                srcset="
-                    https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=400&auto=format&fit=crop 400w,
-                    https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=800&auto=format&fit=crop 800w,
-                    https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=1200&auto=format&fit=crop 1200w
-                "
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                alt="Jamie Robertson Joiners team member working on bespoke joinery in Stirling" 
-                loading="lazy"
-                width="800"
-                height="600"
-                class="absolute inset-0 h-full w-full object-cover"
-            >
+            <picture>
+              <source srcset="i/about-team.webp" type="image/webp">
+              <img 
+                  src="i/about-team.jpg" 
+                  alt="Jamie Robertson Joiners team member working on bespoke joinery in Stirling" 
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  class="absolute inset-0 h-full w-full object-cover"
+              >
+            </picture>
           </div>
         </div>
       </section>
