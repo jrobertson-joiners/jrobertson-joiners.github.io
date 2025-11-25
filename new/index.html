@@ -14,6 +14,10 @@
   <meta name="geo.position" content="56.15516;-4.12703" />
   <meta name="ICBM" content="56.15516, -4.12703" />
 
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="theme-color" content="#1e293b" />
+  <link rel="alternate" hreflang="en-GB" href="https://jrobertson-joiners.co.uk/" />
+
   <meta property="og:locale" content="en_GB" />
   <meta property="og:type" content="website" />
   <meta property="og:title"
@@ -22,14 +26,18 @@
     content="Joinery-led building contractor in Stirling, delivering bespoke kitchens, flooring, structural timber work and full contract builds across Central Scotland with friendly, tidy craftsmanship." />
   <meta property="og:url" content="https://jrobertson-joiners.co.uk/" />
   <meta property="og:image" content="https://jrobertson-joiners.co.uk/i/logo-16x9.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="675" />
+  <meta property="og:site_name" content="Jamie Robertson Joiners" />
   <title>Jamie Robertson Joiners &amp; Building Contractor | Stirling &amp; Central Scotland</title>
   <link rel="preconnect" href="https://formspree.io">
   <link rel="preload" href="fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="i/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="i/android-chrome-192x192.png">
   <link rel="icon" href="i/favicon.ico">
+  <link rel="preload" href="./styles.css?v=1" as="style">
   <link href="./styles.css?v=1" rel="stylesheet">
-      <script type="application/ld+json">
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@graph": [
@@ -192,6 +200,38 @@
             },
             "description": "Joinery-led building contractor in Stirling since 2016. Specialising in bespoke kitchens, flooring, structural timber work and full contract builds across Central Scotland.",
             "inLanguage": "en-GB"
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://jrobertson-joiners.co.uk/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What areas do Jamie Robertson Joiners cover?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We serve Stirling and the surrounding Central Scotland area including Bridge of Allan, Dunblane, Bannockburn, Doune, Callander, Aberfoyle, and the Trossachs."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What joinery services do you offer?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We offer kitchen installation, flooring and decking, internal finishings, custom carpentry, extensions, bespoke staircases, loft conversions, heritage restoration, and general building works."
+                }
+              }
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://jrobertson-joiners.co.uk/#breadcrumb",
+            "itemListElement": [{
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://jrobertson-joiners.co.uk/"
+            }]
           }
         ]
       }
@@ -262,7 +302,7 @@
             Expert Joiner in Stirling
           </h1>
           <p class="text-lg text-white/90 mb-8 leading-relaxed">
-            We provide a professional, friendly joinery-led service from Stirling and the surrounding area, covering
+            We provide a professional, friendly joinery-led service from Stirling and surrounding areas. We cover
             everything from bespoke kitchens and staircases to structural timber work and internal finishings. For
             larger builds and refurbishments, we act as the primary contractor, organising trusted multi-trades and
             keeping your project coordinated from first visit to final handover.
@@ -374,7 +414,7 @@
         <section aria-labelledby="areas-title" class="mt-10 rounded-2xl bg-white p-6 shadow-lg border border-slate-100">
           <h3 id="areas-title" class="text-lg font-semibold text-slate-900">Areas we cover</h3>
           <p class="mt-2 text-sm text-slate-600">
-            Based in Stirling (FK8), we regularly work across the surrounding Central Scotland area.
+            Based in Stirling (FK8), we regularly work across the surrounding Central Scotland area:
           </p>
           <ul class="mt-4 grid gap-2 text-sm text-slate-700 sm:grid-cols-2 md:grid-cols-3">
             <li class="flex items-center gap-2">
@@ -533,7 +573,8 @@
           <picture>
             <source srcset="i/about-team.webp" type="image/webp">
             <img src="i/about-team.jpg" alt="Jamie Robertson Joiners team member working on bespoke joinery in Stirling"
-              loading="lazy" width="800" height="600" class="absolute inset-0 h-full w-full object-cover">
+              loading="lazy" decoding="async" width="800" height="600"
+              class="absolute inset-0 h-full w-full object-cover">
           </picture>
         </div>
       </div>
@@ -594,7 +635,7 @@
             </li>
           </ul>
           <p class="mt-6 text-sm text-white/80">
-            Share a few details and, where helpful, photos of your space. We aim to respond within one working day, and
+            Share a few details, and where helpful, photos of your space. We aim to respond within one working day and
             can usually arrange a visit in the Stirling area within a few days.
           </p>
           <a href="https://wa.me/447917113063"
