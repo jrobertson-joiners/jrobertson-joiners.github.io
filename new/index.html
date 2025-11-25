@@ -14,7 +14,8 @@
   <meta name="geo.position" content="56.15516;-4.12703" />
   <meta name="ICBM" content="56.15516, -4.12703" />
 
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <!-- <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" /> -->
   <meta name="theme-color" content="#1e293b" />
   <link rel="alternate" hreflang="en-GB" href="https://jrobertson-joiners.co.uk/" />
 
@@ -255,7 +256,7 @@
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium" aria-label="Main navigation">
         <a href="#services" class="hover:text-[var(--accent-wood)]">Services</a>
         <a href="#about" class="hover:text-[var(--accent-wood)]">About</a>
         <a href="#contact" class="hover:text-[var(--accent-wood)]">Contact</a>
@@ -278,7 +279,7 @@
 
     <!-- Mobile Menu Dropdown -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 py-4 shadow-lg">
-      <nav class="flex flex-col space-y-4 text-sm font-medium">
+      <nav class="flex flex-col space-y-4 text-sm font-medium" aria-label="Mobile navigation">
         <a href="#services" class="block hover:text-[var(--accent-wood)]">Services</a>
         <a href="#about" class="block hover:text-[var(--accent-wood)]">About</a>
         <a href="#contact" class="block hover:text-[var(--accent-wood)]">Contact</a>
@@ -475,8 +476,8 @@
           </p>
           <div class="mt-6 grid gap-4 md:grid-cols-2">
             <ul class="space-y-2 text-sm text-slate-700">
-              <li class="flex items-start gap-3">
-                <span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--accent-wood)]"></span>
+              <li class="flex items-start gap-2">
+                <span class="mt-1 h-2 w-2 rounded-full bg-[var(--accent-wood)]"></span>
                 Friendly, tidy workmanship from first visit to final handover – we protect floors, clean up daily, and
                 respect your home.
               </li>
@@ -653,7 +654,6 @@
           <h3 class="text-2xl font-semibold text-slate-900 mb-6">
             Send a quick message
           </h3>
-          <!-- TODO: Replace YOUR_FORM_ID with your actual Formspree Form ID -->
           <form id="contact-form" action="https://formspree.io/f/mjkdyrzo" method="POST" class="space-y-5">
             <input type="hidden" name="_subject" value="New quote request from website" />
             <div>
@@ -687,7 +687,11 @@
               class="w-full rounded-full bg-[var(--accent-wood)] px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-orange-700">
               Send Message
             </button>
-            <div id="form-status" class="hidden text-center text-sm"></div>
+            <div id="form-status" class="hidden text-center text-sm" aria-live="polite"></div>
+            <p class="text-xs text-slate-500 mt-3">
+              By submitting this form, you agree that we may store and use your details to respond to your enquiry. We
+              will not share your information with third parties.
+            </p>
           </form>
         </div>
       </div>
@@ -703,7 +707,7 @@
         <a href="#about" class="hover:text-[var(--accent-wood)]">About</a>
         <a href="#contact" class="hover:text-[var(--accent-wood)]">Contact</a>
         <a href="https://www.facebook.com/jrobertsonjoiners2016" class="hover:text-[var(--accent-wood)]" target="_blank"
-          rel="noreferrer">Facebook</a>
+          rel="noreferrer noopener">Facebook</a>
         <a href="https://wa.me/447917113063" class="hover:text-[var(--accent-wood)]" target="_blank"
           rel="noreferrer noopener">WhatsApp</a>
       </div>
