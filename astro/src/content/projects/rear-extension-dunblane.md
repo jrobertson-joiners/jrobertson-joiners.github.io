@@ -1,7 +1,7 @@
 ---
 title: "Single-Storey Rear Extension"
 description: "A bright, open-plan kitchen-diner extension for a family home in Dunblane."
-image: "/v2/i/about-team.webp"
+image: "../../assets/images/projects/about-team.jpg"
 location: "Dunblane"
 services:
   - Extensions

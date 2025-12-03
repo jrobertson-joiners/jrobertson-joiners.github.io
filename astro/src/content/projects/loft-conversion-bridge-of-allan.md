@@ -1,7 +1,7 @@
 ---
 title: "Loft Conversion with En-Suite"
 description: "A dormer loft conversion creating a master bedroom suite with en-suite bathroom in Bridge of Allan."
-image: "/v2/i/about-team.webp"
+image: "../../assets/images/projects/about-team.jpg"
 location: "Bridge of Allan"
 services:
   - Loft Conversions
