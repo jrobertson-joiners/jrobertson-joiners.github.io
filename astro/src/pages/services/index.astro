@@ -1,0 +1,114 @@
+---
+import Base from '../../layouts/Base.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import { getCollection } from 'astro:content';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base
+  title="Our Services | Jamie Robertson Joiners | Stirling"
+  description="Professional joinery and building services in Stirling and Central Scotland. Kitchens, loft conversions, extensions, and general joinery."
+  canonicalPath="/services/"
+>
+  <!-- Hero Section -->
+  <section class="bg-[var(--primary-dark)] text-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm font-semibold text-orange-200 mb-2">What we do</p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Our Services</h1>
+      <p class="text-lg text-white/80 max-w-2xl">
+        From single-room refreshes to full extensions, we offer a tailored approach to handle any home improvement project.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="py-16 bg-[var(--light-gray)]">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid gap-6 sm:grid-cols-2">
+        {services.map(service => (
+          <ServiceCard
+            title={service.data.title}
+            description={service.data.shortDescription}
+            icon={service.data.icon}
+            href={`/v2/services/${service.slug}/`}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Specialities -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-slate-900 mb-4">Additional Specialities</h2>
+      <p class="text-slate-600 mb-6">
+        Beyond our core services, we regularly help with detailed heritage work, one-off commissions, and practical upgrades.
+      </p>
+      <div class="grid gap-4 md:grid-cols-2">
+        <ul class="space-y-2 text-sm text-slate-700">
+          <li class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)] shrink-0"></span>
+            Box frames, windows and doors to spec
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)] shrink-0"></span>
+            Traditional Victorian shutters
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)] shrink-0"></span>
+            Staircase design, manufacture and installation
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)] shrink-0"></span>
+            Heritage and restoration projects
+          </li>
+        </ul>
+        <ul class="space-y-2 text-sm text-slate-700">
+          <li class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)] shrink-0"></span>
+            Framework, forms and structural woodwork
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)] shrink-0"></span>
+            Hardwood flooring refits
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)] shrink-0"></span>
+            Garden sheds and outdoor furniture
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)] shrink-0"></span>
+            Custom furniture and cabinetry
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Areas Covered -->
+  <section class="py-16 bg-[var(--light-gray)]">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-slate-900 mb-4">Areas We Cover</h2>
+      <p class="text-slate-600 mb-6">
+        Based in Stirling (FK8), we regularly work across the surrounding Central Scotland area:
+      </p>
+      <ul class="grid gap-2 text-slate-700 sm:grid-cols-2 md:grid-cols-4">
+        {['Stirling', 'Bridge of Allan', 'Dunblane', 'Bannockburn', 'Cowie', 'Plean', 'Thornhill', 'Deanston', 'Doune', 'Aberfoyle', 'Callander', 'The Trossachs'].map(area => (
+          <li class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)]"></span>
+            {area}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <ContactCTA />
+    </div>
+  </section>
+</Base>

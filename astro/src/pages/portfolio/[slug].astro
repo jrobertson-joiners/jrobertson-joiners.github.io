@@ -1,0 +1,121 @@
+---
+import Base from '../../layouts/Base.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<Base
+  title={`${project.data.title} | Portfolio | Jamie Robertson Joiners`}
+  description={project.data.description}
+  canonicalPath={`/portfolio/${project.slug}/`}
+  ogImage={project.data.image}
+>
+  <!-- Hero Section -->
+  <section class="bg-[var(--primary-dark)] text-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-white/60 mb-4">
+        <a href="/v2/" class="hover:text-white">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/v2/portfolio/" class="hover:text-white">Portfolio</a>
+        <span class="mx-2">/</span>
+        <span class="text-white">{project.data.title}</span>
+      </nav>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">{project.data.title}</h1>
+      <p class="text-lg text-white/80 max-w-2xl">{project.data.description}</p>
+    </div>
+  </section>
+
+  <!-- Project Image -->
+  <section class="py-8 bg-[var(--light-gray)]">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="rounded-2xl overflow-hidden shadow-xl">
+        <img 
+          src={project.data.image} 
+          alt={project.data.title}
+          class="w-full h-64 md:h-96 object-cover"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Details -->
+  <section class="py-8 bg-[var(--light-gray)]">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="bg-white rounded-xl p-4 shadow">
+          <p class="text-xs uppercase tracking-wide text-slate-500 mb-1">Location</p>
+          <p class="font-semibold text-slate-900">{project.data.location}</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow">
+          <p class="text-xs uppercase tracking-wide text-slate-500 mb-1">Services</p>
+          <p class="font-semibold text-slate-900">{project.data.services.join(', ')}</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow">
+          <p class="text-xs uppercase tracking-wide text-slate-500 mb-1">Completed</p>
+          <p class="font-semibold text-slate-900">{project.data.completedDate}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <article class="prose prose-slate prose-lg max-w-none prose-headings:text-slate-900 prose-a:text-[var(--accent-wood)] prose-a:no-underline hover:prose-a:underline">
+        <Content />
+      </article>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  {project.data.gallery && project.data.gallery.length > 0 && (
+    <section class="py-16 bg-[var(--light-gray)]">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">Project Gallery</h2>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {project.data.gallery.map((image: string, index: number) => (
+            <div class="rounded-xl overflow-hidden shadow-lg">
+              <img 
+                src={image} 
+                alt={`${project.data.title} - Image ${index + 1}`}
+                class="w-full h-48 object-cover"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Back to Portfolio -->
+  <section class="py-8">
+    <div class="max-w-4xl mx-auto px-4">
+      <a href="/v2/portfolio/" class="inline-flex items-center text-[var(--accent-wood)] font-semibold hover:underline">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Portfolio
+      </a>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <ContactCTA />
+    </div>
+  </section>
+</Base>

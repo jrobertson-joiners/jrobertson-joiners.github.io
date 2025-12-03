@@ -1,0 +1,128 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+---
+
+<Base
+  title="About Us | Jamie Robertson Joiners | Stirling"
+  description="Learn about Jamie Robertson Joiners - joinery-led building contractors serving Stirling and Central Scotland since 2016. Friendly, professional craftsmanship."
+  canonicalPath="/about/"
+>
+  <!-- Hero Section -->
+  <section class="bg-[var(--primary-dark)] text-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm font-semibold text-orange-200 mb-2">About us</p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Joiners in Stirling since 2016</h1>
+      <p class="text-lg text-white/80 max-w-2xl">
+        Proud of every finish – from single-room refreshes to full contract builds.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 grid gap-10 lg:grid-cols-2">
+      <div>
+        <h2 class="text-2xl font-bold text-slate-900 mb-4">Our Story</h2>
+        <p class="text-slate-600 mb-4">
+          We pride ourselves on customer satisfaction from idea to completion. As a joinery-led building contractor,
+          we tailor every job to suit your individual needs, combining hands-on carpentry with full project
+          management.
+        </p>
+        <p class="text-slate-600 mb-4">
+          Jamie Robertson Joiners has been trading since March 2016, growing from a small workshop serving neighbours
+          into a trusted team covering Stirling and the wider Central Scotland area. With more than a decade of
+          hands-on experience across house building, renovations, and bespoke furniture, we bring the same care to
+          every project, whatever the size.
+        </p>
+        <p class="text-slate-600 mb-4">
+          Our roots are in joinery - from structural timber work and bespoke kitchens to internal finishings and
+          custom storage - but we also coordinate the other trades needed to take your project from first ideas
+          through to completion. Working with a trusted network of electricians, plumbers, plasterers, and decorators,
+          we can deliver full contract construction builds and refurbishments, so you have one point of contact from
+          start to finish.
+        </p>
+        <p class="text-slate-600">
+          Every job is carried out safely, in line with Building Regulations, and with a strong focus on value,
+          quality, and tidy workmanship. Whether it's modernising a flat or building out a larger extension, you
+          can count on practical advice, clear timelines, and work that stands up to everyday life.
+        </p>
+      </div>
+      <div class="relative h-64 lg:h-auto rounded-2xl overflow-hidden shadow-xl">
+        <picture>
+          <source srcset="/v2/i/about-team.webp" type="image/webp">
+          <img src="/v2/i/about-team.jpg" alt="Jamie Robertson Joiners team member working on bespoke joinery in Stirling"
+            loading="lazy" decoding="async" width="800" height="600"
+            class="absolute inset-0 h-full w-full object-cover">
+        </picture>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="py-16 bg-[var(--light-gray)]">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-slate-900 mb-8 text-center">Why Choose Us</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-orange-50 text-[var(--accent-wood)]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Quality Craftsmanship</h3>
+          <p class="text-sm text-slate-600">
+            Detail-focused joiners with decades of combined experience, delivering work that stands up to everyday life.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-orange-50 text-[var(--accent-wood)]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Reliable & On Time</h3>
+          <p class="text-sm text-slate-600">
+            Clear timelines, honest pricing, and minimal disruption. We turn up when we say we will.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-orange-50 text-[var(--accent-wood)]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Full Project Management</h3>
+          <p class="text-sm text-slate-600">
+            One point of contact from start to finish, coordinating all trades for a stress-free experience.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Areas Served Section -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-slate-900 mb-4">Areas We Cover</h2>
+      <p class="text-slate-600 mb-6">
+        Based in Stirling (FK8), we regularly work across the surrounding Central Scotland area:
+      </p>
+      <ul class="grid gap-2 text-slate-700 sm:grid-cols-2 md:grid-cols-4">
+        {['Stirling', 'Bridge of Allan', 'Dunblane', 'Bannockburn', 'Cowie', 'Plean', 'Thornhill', 'Deanston', 'Doune', 'Aberfoyle', 'Callander', 'The Trossachs area'].map(area => (
+          <li class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)]"></span>
+            {area}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact CTA Section -->
+  <section class="py-16 bg-[var(--light-gray)]">
+    <div class="max-w-4xl mx-auto px-4">
+      <ContactCTA />
+    </div>
+  </section>
+</Base>

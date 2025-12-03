@@ -1,0 +1,213 @@
+---
+import Base from '../layouts/Base.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { getCollection } from 'astro:content';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const featuredProjects = (await getCollection('projects')).filter(p => p.data.featured);
+---
+
+<Base
+  title="Jamie Robertson Joiners & Building Contractor | Stirling & Central Scotland"
+  description="Joinery-led building contractor in Stirling since 2016. Specialising in bespoke kitchens, loft conversions, extensions and full contract builds across Central Scotland."
+  canonicalPath="/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HomeAndConstructionBusiness",
+          "@id": "https://jrobertson-joiners.co.uk/#organization",
+          "name": "Jamie Robertson Joiners",
+          "image": [
+            "https://jrobertson-joiners.co.uk/v2/i/logo-1x1.png",
+            "https://jrobertson-joiners.co.uk/v2/i/logo-4x3.png",
+            "https://jrobertson-joiners.co.uk/v2/i/logo-16x9.png"
+          ],
+          "logo": "https://jrobertson-joiners.co.uk/v2/i/logo.png",
+          "telephone": "+44-7917-113063",
+          "email": "info@jrobertson-joiners.co.uk",
+          "url": "https://jrobertson-joiners.co.uk/v2/",
+          "priceRange": "££",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Stirling",
+            "addressRegion": "Central Scotland",
+            "postalCode": "FK8",
+            "addressCountry": "GB"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "56.15516",
+            "longitude": "-4.12703"
+          },
+          "areaServed": [
+            {
+              "@type": "GeoCircle",
+              "geoMidpoint": {
+                "@type": "GeoCoordinates",
+                "latitude": "56.15516",
+                "longitude": "-4.12703"
+              },
+              "geoRadius": "40000"
+            }
+          ],
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "08:00",
+            "closes": "18:00"
+          },
+          "sameAs": [
+            "https://www.facebook.com/jrobertsonjoiners2016",
+            "https://wa.me/447917113063"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://jrobertson-joiners.co.uk/v2/#website",
+          "url": "https://jrobertson-joiners.co.uk/v2/",
+          "name": "Jamie Robertson Joiners & Building Contractor",
+          "description": "Joinery-led building contractor in Stirling since 2016.",
+          "publisher": { "@id": "https://jrobertson-joiners.co.uk/#organization" },
+          "inLanguage": "en-GB"
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <section class="wood-grain bg-[var(--primary-dark)] text-white min-h-[70vh] flex items-center relative">
+    <div class="absolute inset-0 bg-blue-950/90 pointer-events-none"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-4 py-16 grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
+      <div>
+        <p class="uppercase tracking-wider text-sm text-orange-100/90 mb-4 font-semibold">
+          Local Joiner & Building Contractor
+        </p>
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
+          Expert Joiner in Stirling
+        </h1>
+        <p class="text-lg text-white/90 mb-8 leading-relaxed">
+          We provide a professional, friendly joinery-led service to Stirling and surrounding areas. From bespoke kitchens and loft conversions to full contract builds, we deliver quality craftsmanship on every project.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/v2/contact/" class="inline-flex items-center rounded-full bg-white px-6 py-3 font-semibold text-[var(--primary-dark)] shadow-lg shadow-white/20 hover:bg-slate-100">
+            Get in touch
+          </a>
+          <a href="/v2/services/" class="inline-flex items-center rounded-full border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white/10">
+            Explore Services
+          </a>
+        </div>
+      </div>
+      <div class="bg-white/10 border border-white/20 rounded-2xl p-6 shadow-xl">
+        <p class="text-sm uppercase tracking-wider text-white/70 mb-2">Why homeowners choose us</p>
+        <ul class="space-y-3">
+          <li class="flex items-center gap-3">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)] shrink-0"></span>
+            Detail-focused local joiners with decades of combined experience
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)] shrink-0"></span>
+            Friendly, tidy workmanship from first visit to final handover
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)] shrink-0"></span>
+            On time and within budget, with minimal disruption
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Preview Section -->
+  <section class="py-16 bg-[var(--light-gray)]">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-10">
+        <div>
+          <p class="text-sm font-semibold text-[var(--accent-wood)] mb-2">What we do best</p>
+          <h2 class="text-3xl font-bold text-slate-900">Our Services</h2>
+        </div>
+        <a href="/v2/services/" class="mt-4 md:mt-0 text-[var(--accent-wood)] font-medium hover:underline">
+          View all services →
+        </a>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        {services.map(service => (
+          <ServiceCard
+            title={service.data.title}
+            description={service.data.shortDescription}
+            icon={service.data.icon}
+            href={`/v2/services/${service.slug}/`}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- About Teaser Section -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 grid gap-10 lg:grid-cols-2 items-center">
+      <div>
+        <p class="text-sm font-semibold text-[var(--accent-wood)] mb-2">About us</p>
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Joiners in Stirling since 2016</h2>
+        <p class="text-slate-600 mb-4">
+          Jamie Robertson Joiners has been trading since March 2016, growing from a small workshop serving neighbours into a trusted team covering Stirling and the wider Central Scotland area.
+        </p>
+        <p class="text-slate-600 mb-6">
+          Our roots are in joinery – from structural timber work and bespoke kitchens to internal finishings and custom storage – but we also coordinate the other trades needed to take your project from first ideas through to completion.
+        </p>
+        <a href="/v2/about/" class="inline-flex items-center text-[var(--accent-wood)] font-semibold hover:underline">
+          Learn more about us
+          <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+      <div class="relative h-64 lg:h-80 rounded-2xl overflow-hidden shadow-xl">
+        <picture>
+          <source srcset="/v2/i/about-team.webp" type="image/webp">
+          <img src="/v2/i/about-team.jpg" alt="Jamie Robertson Joiners team member working on bespoke joinery"
+            loading="lazy" decoding="async" width="800" height="600"
+            class="absolute inset-0 h-full w-full object-cover">
+        </picture>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  {featuredProjects.length > 0 && (
+    <section class="py-16 bg-[var(--light-gray)]">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-10">
+          <div>
+            <p class="text-sm font-semibold text-[var(--accent-wood)] mb-2">Our work</p>
+            <h2 class="text-3xl font-bold text-slate-900">Featured Projects</h2>
+          </div>
+          <a href="/v2/portfolio/" class="mt-4 md:mt-0 text-[var(--accent-wood)] font-medium hover:underline">
+            View all projects →
+          </a>
+        </div>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredProjects.map(project => (
+            <ProjectCard
+              title={project.data.title}
+              description={project.data.description}
+              image={project.data.image}
+              href={`/v2/portfolio/${project.slug}/`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Contact CTA Section -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <ContactCTA />
+    </div>
+  </section>
+</Base>

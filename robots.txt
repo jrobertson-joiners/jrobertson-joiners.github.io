@@ -8,6 +8,9 @@ Sitemap: https://jrobertson-joiners.co.uk/sitemap.xml
 # Disallow new site directory (staging)
 Disallow: /new/
 
+# Disallow v2 site until launch
+Disallow: /v2/
+
 # Disallow legacy WordPress directories
 Disallow: /wp-admin/
 Disallow: /wp-includes/

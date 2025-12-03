@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@source ".";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+}
+
+:root {
+  --primary-dark: #1e3a8a;
+  --accent-wood: #b45309;
+  --light-gray: #f4f4f9;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('./fonts/Inter.woff2') format('woff2');
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.wood-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M0 30 Q50 5 100 30 T200 30' stroke='rgba(255,255,255,0.08)' stroke-width='3' fill='none'/%3E%3Cpath d='M0 110 Q60 140 120 110 T200 110' stroke='rgba(255,255,255,0.06)' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-size: cover;
+}

@@ -1,0 +1,5 @@
+# Block all crawlers until site is ready for launch
+# Remove this file or update to allow indexing when going live
+
+User-agent: *
+Disallow: /
