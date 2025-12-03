@@ -4,6 +4,7 @@ import ContactCTA from '../../components/ContactCTA.astro';
 import OrganizationSchema from '../../components/schema/OrganizationSchema.astro';
 import ProjectSchema from '../../components/schema/ProjectSchema.astro';
 import BreadcrumbSchema from '../../components/schema/BreadcrumbSchema.astro';
+import Lightbox from '../../components/Lightbox.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -114,8 +115,9 @@ const fullImageUrl = project.data.image.startsWith('http')
               <img 
                 src={image} 
                 alt={`${project.data.title} - Image ${index + 1}`}
-                class="w-full h-48 object-cover"
+                class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
                 loading="lazy"
+                data-lightbox
               />
             </div>
           ))}
@@ -123,6 +125,8 @@ const fullImageUrl = project.data.image.startsWith('http')
       </div>
     </section>
   )}
+
+  <Lightbox />
 
   <!-- Back to Portfolio -->
   <section class="py-8">

@@ -1,0 +1,148 @@
+---
+/**
+ * Image Lightbox - Click to expand gallery images
+ * Pure CSS + minimal JS, no dependencies
+ */
+---
+
+<!-- Lightbox Overlay -->
+<div 
+  id="lightbox" 
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Image lightbox"
+>
+  <button 
+    id="lightbox-close" 
+    class="absolute top-4 right-4 text-white hover:text-slate-300 transition-colors z-10"
+    aria-label="Close lightbox"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+  
+  <button 
+    id="lightbox-prev" 
+    class="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-slate-300 transition-colors p-2"
+    aria-label="Previous image"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+  
+  <button 
+    id="lightbox-next" 
+    class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-slate-300 transition-colors p-2"
+    aria-label="Next image"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+  
+  <img 
+    id="lightbox-image" 
+    src="" 
+    alt="" 
+    class="max-h-[85vh] max-w-[90vw] object-contain rounded-lg shadow-2xl"
+  />
+  
+  <p id="lightbox-caption" class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm bg-black/50 px-4 py-2 rounded-full"></p>
+</div>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const closeBtn = document.getElementById('lightbox-close');
+  const prevBtn = document.getElementById('lightbox-prev');
+  const nextBtn = document.getElementById('lightbox-next');
+  
+  let galleryImages: { src: string; alt: string }[] = [];
+  let currentIndex = 0;
+  
+  // Initialize gallery images
+  function initGallery() {
+    const images = document.querySelectorAll('[data-lightbox]');
+    galleryImages = Array.from(images).map((img) => ({
+      src: (img as HTMLImageElement).src,
+      alt: (img as HTMLImageElement).alt
+    }));
+    
+    images.forEach((img, index) => {
+      img.classList.add('cursor-zoom-in');
+      img.addEventListener('click', () => openLightbox(index));
+    });
+  }
+  
+  function openLightbox(index: number) {
+    currentIndex = index;
+    updateLightboxImage();
+    lightbox?.classList.remove('hidden');
+    lightbox?.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeLightbox() {
+    lightbox?.classList.add('hidden');
+    lightbox?.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+  
+  function updateLightboxImage() {
+    if (lightboxImage && galleryImages[currentIndex]) {
+      lightboxImage.src = galleryImages[currentIndex].src;
+      lightboxImage.alt = galleryImages[currentIndex].alt;
+      if (lightboxCaption) {
+        lightboxCaption.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+      }
+    }
+    
+    // Show/hide nav buttons
+    if (prevBtn) prevBtn.style.display = galleryImages.length > 1 ? 'block' : 'none';
+    if (nextBtn) nextBtn.style.display = galleryImages.length > 1 ? 'block' : 'none';
+  }
+  
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    updateLightboxImage();
+  }
+  
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    updateLightboxImage();
+  }
+  
+  // Event listeners
+  closeBtn?.addEventListener('click', closeLightbox);
+  prevBtn?.addEventListener('click', prevImage);
+  nextBtn?.addEventListener('click', nextImage);
+  
+  // Close on backdrop click
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (lightbox?.classList.contains('hidden')) return;
+    
+    switch (e.key) {
+      case 'Escape':
+        closeLightbox();
+        break;
+      case 'ArrowLeft':
+        prevImage();
+        break;
+      case 'ArrowRight':
+        nextImage();
+        break;
+    }
+  });
+  
+  // Initialize on page load
+  initGallery();
+</script>

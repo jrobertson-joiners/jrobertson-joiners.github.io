@@ -20,6 +20,7 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import StickyCTA from '../components/StickyCTA.astro';
 ---
 
 <!DOCTYPE html>
@@ -88,6 +89,8 @@ import Footer from '../components/Footer.astro';
   </main>
   
   <Footer />
+
+  <StickyCTA />
 
   <slot name="scripts" />
 </body>
