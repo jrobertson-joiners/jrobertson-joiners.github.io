@@ -73,9 +73,9 @@ const fullImageUrl = imageSrc.startsWith('http')
         <Image 
           src={project.data.image} 
           alt={project.data.title}
-          width={1200}
+          width={1600}
           format="webp"
-          quality={85}
+          quality={95}
           class="w-full h-64 md:h-96 object-cover"
           loading="eager"
         />
@@ -123,9 +123,9 @@ const fullImageUrl = imageSrc.startsWith('http')
               <Image 
                 src={galleryImage} 
                 alt={`${project.data.title} - Image ${index + 1}`}
-                width={600}
+                width={800}
                 format="webp"
-                quality={85}
+                quality={90}
                 class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
                 loading="lazy"
                 data-lightbox
