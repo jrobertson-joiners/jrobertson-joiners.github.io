@@ -34,15 +34,21 @@
 <script>
   // Show/hide sticky CTA based on scroll position
   const stickyCta = document.getElementById('sticky-cta');
+  const footer = document.querySelector('footer');
   const showThreshold = 400; // Show after scrolling 400px
   
   function updateCtaVisibility() {
-    if (window.scrollY > showThreshold) {
-      stickyCta?.classList.remove('translate-y-24', 'opacity-0');
-      stickyCta?.classList.add('translate-y-0', 'opacity-100');
-    } else {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const footerTop = footer?.getBoundingClientRect().top ?? Infinity;
+    
+    // Hide if not scrolled enough OR if footer is visible
+    if (scrollY <= showThreshold || footerTop < windowHeight) {
       stickyCta?.classList.add('translate-y-24', 'opacity-0');
       stickyCta?.classList.remove('translate-y-0', 'opacity-100');
+    } else {
+      stickyCta?.classList.remove('translate-y-24', 'opacity-0');
+      stickyCta?.classList.add('translate-y-0', 'opacity-100');
     }
   }
   
