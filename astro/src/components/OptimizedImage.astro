@@ -1,0 +1,58 @@
+---
+/**
+ * OptimizedImage - Wrapper for Astro's Image component with sensible defaults
+ * Automatically generates WebP/AVIF and responsive srcsets
+ */
+import { Image } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata | string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  decoding?: 'async' | 'sync' | 'auto';
+  quality?: number;
+  format?: 'webp' | 'avif' | 'png' | 'jpeg';
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  class: className = '',
+  loading = 'lazy',
+  decoding = 'async',
+  quality = 80,
+  format = 'webp',
+} = Astro.props;
+
+// For remote URLs, we can't use Astro's Image optimization
+const isRemote = typeof src === 'string' && src.startsWith('http');
+---
+
+{isRemote ? (
+  <img 
+    src={src} 
+    alt={alt} 
+    width={width} 
+    height={height}
+    loading={loading}
+    decoding={decoding}
+    class={className}
+  />
+) : (
+  <Image
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding={decoding}
+    quality={quality}
+    format={format}
+    class={className}
+  />
+)}

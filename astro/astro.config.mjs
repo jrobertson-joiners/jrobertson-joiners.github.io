@@ -1,12 +1,29 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://jrobertson-joiners.co.uk',
   base: '/v2/',
+
+  // Integrations
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/404'),  // Exclude 404 from sitemap
+    }),
+  ],
+
+  // Image optimization with Sharp
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        limitInputPixels: false,  // Allow large images
+      },
+    },
+  },
 
   // Build optimizations
   compressHTML: true,           // Minify HTML output

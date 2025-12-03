@@ -1,15 +1,23 @@
 ---
+import { Image } from 'astro:assets';
+import logoImage from '../assets/images/logo.png';
+
 const currentPath = Astro.url.pathname;
 ---
 
 <header class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm border-b border-slate-100">
   <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
     <a href="/v2/" class="text-lg md:text-xl font-semibold text-slate-900 flex items-center gap-2">
-      <picture>
-        <source srcset="/v2/i/logo.webp" type="image/webp">
-        <img src="/v2/i/logo.png" alt="Jamie Robertson Joiners and Building Contractor Logo" width="40" height="40"
-          class="h-10 w-auto" fetchpriority="high" />
-      </picture>
+      <Image 
+        src={logoImage} 
+        alt="Jamie Robertson Joiners and Building Contractor Logo" 
+        width={40} 
+        height={40}
+        quality={90}
+        format="webp"
+        class="h-10 w-auto"
+        loading="eager"
+      />
       <span>Jamie Robertson <span class="text-[var(--accent-wood)]">Joiners<span class="hidden md:inline"> &amp;
             Building Contractor</span></span></span>
     </a>

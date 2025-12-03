@@ -4,6 +4,8 @@ import ContactCTA from '../components/ContactCTA.astro';
 import OrganizationSchema from '../components/schema/OrganizationSchema.astro';
 import AboutSchema from '../components/schema/AboutSchema.astro';
 import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
+import { Image } from 'astro:assets';
+import aboutTeamImage from '../assets/images/about-team.jpg';
 ---
 
 <Base
@@ -60,12 +62,17 @@ import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
         </p>
       </div>
       <div class="relative h-64 lg:h-auto rounded-2xl overflow-hidden shadow-xl">
-        <picture>
-          <source srcset="/v2/i/about-team.webp" type="image/webp">
-          <img src="/v2/i/about-team.jpg" alt="Jamie Robertson Joiners team member working on bespoke joinery in Stirling"
-            loading="lazy" decoding="async" width="800" height="600"
-            class="absolute inset-0 h-full w-full object-cover">
-        </picture>
+        <Image 
+          src={aboutTeamImage} 
+          alt="Jamie Robertson Joiners team member working on bespoke joinery in Stirling"
+          width={800}
+          height={600}
+          quality={80}
+          format="webp"
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
       </div>
     </div>
   </section>
