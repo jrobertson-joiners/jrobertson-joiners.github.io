@@ -2,9 +2,26 @@
 import Base from '../../layouts/Base.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
+import OrganizationSchema from '../../components/schema/OrganizationSchema.astro';
+import BreadcrumbSchema from '../../components/schema/BreadcrumbSchema.astro';
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('projects');
+
+// Generate ItemList schema for portfolio
+const projectsListSchema = projects.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Joinery Projects Portfolio",
+  "description": "Completed joinery and building projects by Jamie Robertson Joiners in Stirling",
+  "numberOfItems": projects.length,
+  "itemListElement": projects.map((project, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": project.data.title,
+    "url": `https://jrobertson-joiners.co.uk/v2/portfolio/${project.slug}/`
+  }))
+} : null;
 ---
 
 <Base
@@ -12,6 +29,14 @@ const projects = await getCollection('projects');
   description="View our portfolio of completed joinery and building projects across Stirling and Central Scotland. Kitchens, loft conversions, extensions, and more."
   canonicalPath="/portfolio/"
 >
+  <Fragment slot="head">
+    <OrganizationSchema />
+    <BreadcrumbSchema items={[
+      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/v2/' },
+      { name: 'Portfolio', url: 'https://jrobertson-joiners.co.uk/v2/portfolio/' }
+    ]} />
+    {projectsListSchema && <script type="application/ld+json" set:html={JSON.stringify(projectsListSchema)} />}
+  </Fragment>
   <!-- Hero Section -->
   <section class="bg-[var(--primary-dark)] text-white py-16">
     <div class="max-w-6xl mx-auto px-4">

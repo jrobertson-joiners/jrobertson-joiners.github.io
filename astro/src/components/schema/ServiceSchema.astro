@@ -1,0 +1,36 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  url: string;
+  image?: string;
+  serviceType: string;
+  areaServed?: string[];
+}
+
+const { name, description, url, image, serviceType, areaServed = ['Stirling', 'Central Scotland'] } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": url,
+  "name": name,
+  "description": description,
+  "serviceType": serviceType,
+  "provider": {
+    "@id": "https://jrobertson-joiners.co.uk/#organization"
+  },
+  "areaServed": areaServed.map(area => ({
+    "@type": "City",
+    "name": area
+  })),
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://jrobertson-joiners.co.uk/v2/contact/",
+    "servicePhone": "+44-7917-113063"
+  },
+  ...(image && { "image": image })
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

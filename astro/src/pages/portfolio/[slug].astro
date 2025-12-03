@@ -1,6 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
+import OrganizationSchema from '../../components/schema/OrganizationSchema.astro';
+import ProjectSchema from '../../components/schema/ProjectSchema.astro';
+import BreadcrumbSchema from '../../components/schema/BreadcrumbSchema.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -13,6 +16,11 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await project.render();
+
+const projectUrl = `https://jrobertson-joiners.co.uk/v2/portfolio/${project.slug}/`;
+const fullImageUrl = project.data.image.startsWith('http') 
+  ? project.data.image 
+  : `https://jrobertson-joiners.co.uk${project.data.image}`;
 ---
 
 <Base
@@ -21,6 +29,22 @@ const { Content } = await project.render();
   canonicalPath={`/portfolio/${project.slug}/`}
   ogImage={project.data.image}
 >
+  <Fragment slot="head">
+    <OrganizationSchema />
+    <ProjectSchema 
+      name={project.data.title}
+      description={project.data.description}
+      url={projectUrl}
+      image={fullImageUrl}
+      datePublished={project.data.completedDate}
+      location={project.data.location}
+    />
+    <BreadcrumbSchema items={[
+      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/v2/' },
+      { name: 'Portfolio', url: 'https://jrobertson-joiners.co.uk/v2/portfolio/' },
+      { name: project.data.title, url: projectUrl }
+    ]} />
+  </Fragment>
   <!-- Hero Section -->
   <section class="bg-[var(--primary-dark)] text-white py-16">
     <div class="max-w-6xl mx-auto px-4">

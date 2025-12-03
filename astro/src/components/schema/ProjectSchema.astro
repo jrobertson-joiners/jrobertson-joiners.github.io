@@ -1,0 +1,39 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  url: string;
+  image: string;
+  datePublished?: string;
+  location: string;
+}
+
+const { name, description, url, image, datePublished, location } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": url,
+  "headline": name,
+  "description": description,
+  "image": image,
+  "author": {
+    "@id": "https://jrobertson-joiners.co.uk/#organization"
+  },
+  "publisher": {
+    "@id": "https://jrobertson-joiners.co.uk/#organization"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": url
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Joinery Project",
+    "description": `Completed joinery project in ${location}`
+  },
+  ...(datePublished && { "datePublished": datePublished })
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

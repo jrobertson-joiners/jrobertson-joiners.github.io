@@ -1,6 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
+import OrganizationSchema from '../../components/schema/OrganizationSchema.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import BreadcrumbSchema from '../../components/schema/BreadcrumbSchema.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -13,6 +16,9 @@ export async function getStaticPaths() {
 
 const { service } = Astro.props;
 const { Content } = await service.render();
+
+const serviceUrl = `https://jrobertson-joiners.co.uk/v2/services/${service.slug}/`;
+const areas = service.data.areas || ['Stirling', 'Bridge of Allan', 'Dunblane', 'Bannockburn'];
 ---
 
 <Base
@@ -20,6 +26,21 @@ const { Content } = await service.render();
   description={service.data.description}
   canonicalPath={`/services/${service.slug}/`}
 >
+  <Fragment slot="head">
+    <OrganizationSchema />
+    <ServiceSchema 
+      name={service.data.title}
+      description={service.data.description}
+      url={serviceUrl}
+      serviceType={service.data.title}
+      areaServed={areas}
+    />
+    <BreadcrumbSchema items={[
+      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/v2/' },
+      { name: 'Services', url: 'https://jrobertson-joiners.co.uk/v2/services/' },
+      { name: service.data.title, url: serviceUrl }
+    ]} />
+  </Fragment>
   <!-- Hero Section -->
   <section class="bg-[var(--primary-dark)] text-white py-16">
     <div class="max-w-6xl mx-auto px-4">

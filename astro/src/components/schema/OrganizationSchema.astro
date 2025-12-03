@@ -1,0 +1,160 @@
+---
+/**
+ * Shared organization schema - referenced by all pages
+ * This establishes the business identity for Google
+ */
+interface Props {
+  includeWebsite?: boolean;
+}
+
+const { includeWebsite = false } = Astro.props;
+
+const organizationSchema = {
+  "@type": "HomeAndConstructionBusiness",
+  "@id": "https://jrobertson-joiners.co.uk/#organization",
+  "name": "Jamie Robertson Joiners",
+  "alternateName": "J Robertson Joiners",
+  "image": [
+    "https://jrobertson-joiners.co.uk/v2/i/logo-1x1.png",
+    "https://jrobertson-joiners.co.uk/v2/i/logo-4x3.png",
+    "https://jrobertson-joiners.co.uk/v2/i/logo-16x9.png"
+  ],
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://jrobertson-joiners.co.uk/v2/i/logo.png",
+    "width": 512,
+    "height": 512
+  },
+  "telephone": "+44-7917-113063",
+  "email": "info@jrobertson-joiners.co.uk",
+  "url": "https://jrobertson-joiners.co.uk/",
+  "priceRange": "££",
+  "currenciesAccepted": "GBP",
+  "paymentAccepted": "Cash, Bank Transfer",
+  "foundingDate": "2016-03",
+  "founder": {
+    "@type": "Person",
+    "name": "Jamie Robertson"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Stirling",
+    "addressRegion": "Stirlingshire",
+    "postalCode": "FK8",
+    "addressCountry": "GB"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "56.15516",
+    "longitude": "-4.12703"
+  },
+  "areaServed": [
+    {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": "56.15516",
+        "longitude": "-4.12703"
+      },
+      "geoRadius": "40000"
+    },
+    { "@type": "City", "name": "Stirling" },
+    { "@type": "City", "name": "Bridge of Allan" },
+    { "@type": "City", "name": "Dunblane" },
+    { "@type": "City", "name": "Bannockburn" },
+    { "@type": "City", "name": "Doune" },
+    { "@type": "City", "name": "Callander" },
+    { "@type": "City", "name": "Cowie" },
+    { "@type": "City", "name": "Plean" },
+    { "@type": "City", "name": "Thornhill" },
+    { "@type": "City", "name": "Deanston" },
+    { "@type": "City", "name": "Aberfoyle" },
+    { "@type": "City", "name": "Fallin" },
+    { "@type": "City", "name": "Cambusbarron" },
+    { "@type": "City", "name": "St Ninians" },
+    { "@type": "City", "name": "Alloa" },
+    { "@type": "City", "name": "Tullibody" },
+    { "@type": "City", "name": "Kippen" },
+    { "@type": "City", "name": "Blair Drummond" }
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "09:00",
+      "closes": "13:00"
+    }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/jrobertsonjoiners2016",
+    "https://wa.me/447917113063"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Joinery & Building Services",
+    "itemListElement": [
+      {
+        "@type": "OfferCatalog",
+        "name": "Kitchen Installation",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Kitchen fitting" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cabinet installation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Worktop fitting" } }
+        ]
+      },
+      {
+        "@type": "OfferCatalog", 
+        "name": "Loft Conversions",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dormer conversions" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Velux conversions" } }
+        ]
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Home Extensions",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Single-storey extensions" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Two-storey extensions" } }
+        ]
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "General Joinery",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Doors and windows" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Flooring" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Staircases" } }
+        ]
+      }
+    ]
+  }
+};
+
+const websiteSchema = {
+  "@type": "WebSite",
+  "@id": "https://jrobertson-joiners.co.uk/#website",
+  "url": "https://jrobertson-joiners.co.uk/",
+  "name": "Jamie Robertson Joiners & Building Contractor",
+  "description": "Joinery-led building contractor in Stirling since 2016.",
+  "publisher": { "@id": "https://jrobertson-joiners.co.uk/#organization" },
+  "inLanguage": "en-GB"
+};
+
+const graph = includeWebsite 
+  ? [organizationSchema, websiteSchema]
+  : [organizationSchema];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": graph
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import ContactCTA from '../components/ContactCTA.astro';
+import OrganizationSchema from '../components/schema/OrganizationSchema.astro';
+import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
 import { getCollection } from 'astro:content';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
@@ -15,68 +17,10 @@ const featuredProjects = (await getCollection('projects')).filter(p => p.data.fe
   canonicalPath="/"
 >
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "HomeAndConstructionBusiness",
-          "@id": "https://jrobertson-joiners.co.uk/#organization",
-          "name": "Jamie Robertson Joiners",
-          "image": [
-            "https://jrobertson-joiners.co.uk/v2/i/logo-1x1.png",
-            "https://jrobertson-joiners.co.uk/v2/i/logo-4x3.png",
-            "https://jrobertson-joiners.co.uk/v2/i/logo-16x9.png"
-          ],
-          "logo": "https://jrobertson-joiners.co.uk/v2/i/logo.png",
-          "telephone": "+44-7917-113063",
-          "email": "info@jrobertson-joiners.co.uk",
-          "url": "https://jrobertson-joiners.co.uk/v2/",
-          "priceRange": "££",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Stirling",
-            "addressRegion": "Central Scotland",
-            "postalCode": "FK8",
-            "addressCountry": "GB"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "56.15516",
-            "longitude": "-4.12703"
-          },
-          "areaServed": [
-            {
-              "@type": "GeoCircle",
-              "geoMidpoint": {
-                "@type": "GeoCoordinates",
-                "latitude": "56.15516",
-                "longitude": "-4.12703"
-              },
-              "geoRadius": "40000"
-            }
-          ],
-          "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-            "opens": "08:00",
-            "closes": "18:00"
-          },
-          "sameAs": [
-            "https://www.facebook.com/jrobertsonjoiners2016",
-            "https://wa.me/447917113063"
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://jrobertson-joiners.co.uk/v2/#website",
-          "url": "https://jrobertson-joiners.co.uk/v2/",
-          "name": "Jamie Robertson Joiners & Building Contractor",
-          "description": "Joinery-led building contractor in Stirling since 2016.",
-          "publisher": { "@id": "https://jrobertson-joiners.co.uk/#organization" },
-          "inLanguage": "en-GB"
-        }
-      ]
-    })} />
+    <OrganizationSchema includeWebsite={true} />
+    <BreadcrumbSchema items={[
+      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/v2/' }
+    ]} />
   </Fragment>
 
   <!-- Hero Section -->

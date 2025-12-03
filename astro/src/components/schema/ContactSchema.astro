@@ -1,0 +1,34 @@
+---
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": "https://jrobertson-joiners.co.uk/v2/contact/",
+  "name": "Contact Jamie Robertson Joiners",
+  "description": "Get in touch with Jamie Robertson Joiners for a free quote on joinery, kitchens, loft conversions, and building work in Stirling.",
+  "mainEntity": {
+    "@id": "https://jrobertson-joiners.co.uk/#organization"
+  },
+  "potentialAction": {
+    "@type": "CommunicateAction",
+    "target": [
+      {
+        "@type": "EntryPoint",
+        "urlTemplate": "tel:+447917113063",
+        "name": "Call us"
+      },
+      {
+        "@type": "EntryPoint",
+        "urlTemplate": "mailto:info@jrobertson-joiners.co.uk",
+        "name": "Email us"
+      },
+      {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://wa.me/447917113063",
+        "name": "WhatsApp us"
+      }
+    ]
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

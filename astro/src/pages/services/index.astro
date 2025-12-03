@@ -2,9 +2,51 @@
 import Base from '../../layouts/Base.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
+import OrganizationSchema from '../../components/schema/OrganizationSchema.astro';
+import BreadcrumbSchema from '../../components/schema/BreadcrumbSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
 import { getCollection } from 'astro:content';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+
+// FAQ items for schema and display
+const faqs = [
+  {
+    question: "What areas do you cover in Scotland?",
+    answer: "We're based in Stirling (FK8) and cover Central Scotland including Bridge of Allan, Dunblane, Bannockburn, Doune, Callander, and the Trossachs. We typically work within a 25-mile radius of Stirling."
+  },
+  {
+    question: "Do you provide free quotes?",
+    answer: "Yes, we provide free, no-obligation quotes for all our services. We'll visit your property to discuss your requirements and provide a detailed written estimate."
+  },
+  {
+    question: "Are you fully insured?",
+    answer: "Yes, we carry full public liability insurance and employer's liability insurance. We're happy to provide documentation on request."
+  },
+  {
+    question: "Do you handle building warrant applications?",
+    answer: "Yes, for projects that require building warrants (such as loft conversions and extensions), we can assist with the application process and ensure all work meets Scottish Building Regulations."
+  },
+  {
+    question: "How long have you been trading?",
+    answer: "Jamie Robertson Joiners has been trading since March 2016. Jamie has over a decade of hands-on experience in joinery and building work across Scotland."
+  }
+];
+
+// Generate ItemList schema for services
+const servicesListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Joinery Services in Stirling",
+  "description": "Professional joinery and building services offered by Jamie Robertson Joiners",
+  "numberOfItems": services.length,
+  "itemListElement": services.map((service, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": service.data.title,
+    "url": `https://jrobertson-joiners.co.uk/v2/services/${service.slug}/`
+  }))
+};
 ---
 
 <Base
@@ -12,6 +54,15 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
   description="Professional joinery and building services in Stirling and Central Scotland. Kitchens, loft conversions, extensions, and general joinery."
   canonicalPath="/services/"
 >
+  <Fragment slot="head">
+    <OrganizationSchema />
+    <BreadcrumbSchema items={[
+      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/v2/' },
+      { name: 'Services', url: 'https://jrobertson-joiners.co.uk/v2/services/' }
+    ]} />
+    <FAQSchema faqs={faqs} />
+    <script type="application/ld+json" set:html={JSON.stringify(servicesListSchema)} />
+  </Fragment>
   <!-- Hero Section -->
   <section class="bg-[var(--primary-dark)] text-white py-16">
     <div class="max-w-6xl mx-auto px-4">
@@ -83,6 +134,28 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
             Custom furniture and cabinetry
           </li>
         </ul>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqs.map((faq, index) => (
+          <details class="group bg-white rounded-xl shadow-md border border-slate-100">
+            <summary class="flex cursor-pointer items-center justify-between p-5 text-left font-semibold text-slate-900 hover:bg-slate-50 rounded-xl">
+              <span>{faq.question}</span>
+              <svg class="h-5 w-5 shrink-0 text-slate-500 transition-transform group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-5 text-slate-600">
+              {faq.answer}
+            </div>
+          </details>
+        ))}
       </div>
     </div>
   </section>

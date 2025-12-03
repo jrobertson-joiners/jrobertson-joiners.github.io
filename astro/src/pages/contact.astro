@@ -1,5 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import OrganizationSchema from '../components/schema/OrganizationSchema.astro';
+import ContactSchema from '../components/schema/ContactSchema.astro';
+import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
 ---
 
 <Base
@@ -7,6 +10,14 @@ import Base from '../layouts/Base.astro';
   description="Get in touch with Jamie Robertson Joiners for a free quote on joinery, kitchens, loft conversions, and building work in Stirling and Central Scotland."
   canonicalPath="/contact/"
 >
+  <Fragment slot="head">
+    <OrganizationSchema />
+    <ContactSchema />
+    <BreadcrumbSchema items={[
+      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/v2/' },
+      { name: 'Contact Us', url: 'https://jrobertson-joiners.co.uk/v2/contact/' }
+    ]} />
+  </Fragment>
   <!-- Hero Section -->
   <section class="bg-[var(--primary-dark)] text-white py-16">
     <div class="max-w-6xl mx-auto px-4">

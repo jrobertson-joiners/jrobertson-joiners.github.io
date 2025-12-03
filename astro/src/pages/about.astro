@@ -1,6 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import ContactCTA from '../components/ContactCTA.astro';
+import OrganizationSchema from '../components/schema/OrganizationSchema.astro';
+import AboutSchema from '../components/schema/AboutSchema.astro';
+import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
 ---
 
 <Base
@@ -8,6 +11,14 @@ import ContactCTA from '../components/ContactCTA.astro';
   description="Learn about Jamie Robertson Joiners - joinery-led building contractors serving Stirling and Central Scotland since 2016. Friendly, professional craftsmanship."
   canonicalPath="/about/"
 >
+  <Fragment slot="head">
+    <OrganizationSchema />
+    <AboutSchema />
+    <BreadcrumbSchema items={[
+      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/v2/' },
+      { name: 'About Us', url: 'https://jrobertson-joiners.co.uk/v2/about/' }
+    ]} />
+  </Fragment>
   <!-- Hero Section -->
   <section class="bg-[var(--primary-dark)] text-white py-16">
     <div class="max-w-6xl mx-auto px-4">
