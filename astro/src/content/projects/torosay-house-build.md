@@ -21,7 +21,7 @@ gallery:
   - "../../assets/images/projects/torosay/18.png"
   - "../../assets/images/projects/torosay/19.png"
   - "../../assets/images/projects/torosay/20.png"
-location: "Stirling"
+location: "Greenloaning"
 services:
   - General Joinery
   - Extensions
