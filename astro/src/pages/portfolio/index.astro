@@ -19,7 +19,7 @@ const projectsListSchema = projects.length > 0 ? {
     "@type": "ListItem",
     "position": index + 1,
     "name": project.data.title,
-    "url": `https://jrobertson-joiners.co.uk/v2/portfolio/${project.slug}/`
+    "url": `https://jrobertson-joiners.co.uk/portfolio/${project.slug}/`
   }))
 } : null;
 ---
@@ -32,8 +32,8 @@ const projectsListSchema = projects.length > 0 ? {
   <Fragment slot="head">
     <OrganizationSchema />
     <BreadcrumbSchema items={[
-      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/v2/' },
-      { name: 'Portfolio', url: 'https://jrobertson-joiners.co.uk/v2/portfolio/' }
+      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/' },
+      { name: 'Portfolio', url: 'https://jrobertson-joiners.co.uk/portfolio/' }
     ]} />
     {projectsListSchema && <script type="application/ld+json" set:html={JSON.stringify(projectsListSchema)} />}
   </Fragment>
@@ -58,7 +58,7 @@ const projectsListSchema = projects.length > 0 ? {
               title={project.data.title}
               description={project.data.description}
               image={project.data.image}
-              href={`/v2/portfolio/${project.slug}/`}
+              href={`/portfolio/${project.slug}/`}
             />
           ))}
         </div>

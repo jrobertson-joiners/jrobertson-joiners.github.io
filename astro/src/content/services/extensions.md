@@ -48,4 +48,4 @@ Extensions involve significant timber work – roof structures, floor joists, st
 
 Every extension project starts with an informal chat. We'll visit your property, discuss your ideas, and provide honest advice on what's achievable within your budget.
 
-[Book a free consultation](/v2/contact/) to explore your options.
+[Book a free consultation](/contact/) to explore your options.

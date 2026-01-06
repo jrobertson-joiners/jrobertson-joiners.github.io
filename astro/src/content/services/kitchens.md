@@ -39,4 +39,4 @@ On installation day, we work methodically through each element, ensuring every u
 - Clear timelines and honest pricing
 - Full cleanup and waste removal included
 
-Ready to discuss your kitchen project? [Get in touch](/v2/contact/) for a free, no-obligation quote.
+Ready to discuss your kitchen project? [Get in touch](/contact/) for a free, no-obligation quote.

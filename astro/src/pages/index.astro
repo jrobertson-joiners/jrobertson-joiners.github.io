@@ -21,7 +21,7 @@ const featuredProjects = (await getCollection('projects')).filter(p => p.data.fe
   <Fragment slot="head">
     <OrganizationSchema includeWebsite={true} />
     <BreadcrumbSchema items={[
-      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/v2/' }
+      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/' }
     ]} />
   </Fragment>
 
@@ -40,10 +40,10 @@ const featuredProjects = (await getCollection('projects')).filter(p => p.data.fe
           We provide a professional, friendly joinery-led service in Stirling and surrounding areas. From bespoke kitchens and loft conversions to full contract builds, we deliver quality craftsmanship on every project.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 sm:justify-center md:justify-start">
-          <a href="/v2/contact/" class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-[var(--primary-dark)] shadow-lg shadow-white/20 hover:bg-slate-100">
+          <a href="/contact/" class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-[var(--primary-dark)] shadow-lg shadow-white/20 hover:bg-slate-100">
             Get in touch
           </a>
-          <a href="/v2/services/" class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white/10">
+          <a href="/services/" class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white/10">
             Explore Services
           </a>
         </div>
@@ -76,7 +76,7 @@ const featuredProjects = (await getCollection('projects')).filter(p => p.data.fe
           <p class="text-sm font-semibold text-[var(--accent-wood)] mb-2">What we do best</p>
           <h2 class="text-3xl font-bold text-slate-900">Our Services</h2>
         </div>
-        <a href="/v2/services/" class="mt-4 md:mt-0 text-[var(--accent-wood)] font-medium hover:underline">
+        <a href="/services/" class="mt-4 md:mt-0 text-[var(--accent-wood)] font-medium hover:underline">
           View all services →
         </a>
       </div>
@@ -86,7 +86,7 @@ const featuredProjects = (await getCollection('projects')).filter(p => p.data.fe
             title={service.data.title}
             description={service.data.shortDescription}
             icon={service.data.icon}
-            href={`/v2/services/${service.slug}/`}
+            href={`/services/${service.slug}/`}
           />
         ))}
       </div>
@@ -105,7 +105,7 @@ const featuredProjects = (await getCollection('projects')).filter(p => p.data.fe
         <p class="text-slate-600 mb-6">
           Our roots are in joinery – from structural timber work and bespoke kitchens to internal finishings and custom storage – but we also coordinate the other trades needed to take your project from first ideas through to completion.
         </p>
-        <a href="/v2/about/" class="inline-flex items-center text-[var(--accent-wood)] font-semibold hover:underline">
+        <a href="/about/" class="inline-flex items-center text-[var(--accent-wood)] font-semibold hover:underline">
           Learn more about us
           <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -137,7 +137,7 @@ const featuredProjects = (await getCollection('projects')).filter(p => p.data.fe
             <p class="text-sm font-semibold text-[var(--accent-wood)] mb-2">Our work</p>
             <h2 class="text-3xl font-bold text-slate-900">Featured Projects</h2>
           </div>
-          <a href="/v2/portfolio/" class="mt-4 md:mt-0 text-[var(--accent-wood)] font-medium hover:underline">
+          <a href="/portfolio/" class="mt-4 md:mt-0 text-[var(--accent-wood)] font-medium hover:underline">
             View all projects →
           </a>
         </div>
@@ -147,7 +147,7 @@ const featuredProjects = (await getCollection('projects')).filter(p => p.data.fe
               title={project.data.title}
               description={project.data.description}
               image={project.data.image}
-              href={`/v2/portfolio/${project.slug}/`}
+              href={`/portfolio/${project.slug}/`}
             />
           ))}
         </div>

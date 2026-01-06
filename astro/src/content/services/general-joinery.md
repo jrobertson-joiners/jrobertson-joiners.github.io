@@ -73,4 +73,4 @@ Based in Stirling (FK8), we work throughout Central Scotland including Bridge of
 
 Whether it's a quick repair or a major joinery project, we're happy to provide a free, no-obligation quote.
 
-[Contact us today](/v2/contact/) to discuss your requirements.
+[Contact us today](/contact/) to discuss your requirements.

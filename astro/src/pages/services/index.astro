@@ -40,7 +40,7 @@ const servicesListSchema = {
     "@type": "ListItem",
     "position": index + 1,
     "name": service.data.title,
-    "url": `https://jrobertson-joiners.co.uk/v2/services/${service.slug}/`
+    "url": `https://jrobertson-joiners.co.uk/services/${service.slug}/`
   }))
 };
 ---
@@ -53,8 +53,8 @@ const servicesListSchema = {
   <Fragment slot="head">
     <OrganizationSchema />
     <BreadcrumbSchema items={[
-      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/v2/' },
-      { name: 'Services', url: 'https://jrobertson-joiners.co.uk/v2/services/' }
+      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/' },
+      { name: 'Services', url: 'https://jrobertson-joiners.co.uk/services/' }
     ]} />
     <FAQSchema faqs={faqs} />
     <script type="application/ld+json" set:html={JSON.stringify(servicesListSchema)} />
@@ -79,7 +79,7 @@ const servicesListSchema = {
             title={service.data.title}
             description={service.data.shortDescription}
             icon={service.data.icon}
-            href={`/v2/services/${service.slug}/`}
+            href={`/services/${service.slug}/`}
           />
         ))}
       </div>

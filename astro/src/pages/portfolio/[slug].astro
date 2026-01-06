@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await project.render();
 
-const projectUrl = `https://jrobertson-joiners.co.uk/v2/portfolio/${project.slug}/`;
+const projectUrl = `https://jrobertson-joiners.co.uk/portfolio/${project.slug}/`;
 // Extract image src for schema and og:image - handles both ImageMetadata and string
 const imageSrc = typeof project.data.image === 'string' 
   ? project.data.image 
@@ -46,8 +46,8 @@ const fullImageUrl = imageSrc.startsWith('http')
       location={project.data.location}
     />
     <BreadcrumbSchema items={[
-      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/v2/' },
-      { name: 'Portfolio', url: 'https://jrobertson-joiners.co.uk/v2/portfolio/' },
+      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/' },
+      { name: 'Portfolio', url: 'https://jrobertson-joiners.co.uk/portfolio/' },
       { name: project.data.title, url: projectUrl }
     ]} />
   </Fragment>
@@ -55,9 +55,9 @@ const fullImageUrl = imageSrc.startsWith('http')
   <section class="bg-[var(--primary-dark)] text-white py-16">
     <div class="max-w-6xl mx-auto px-4">
       <nav class="text-sm text-white/60 mb-4">
-        <a href="/v2/" class="hover:text-white">Home</a>
+        <a href="/" class="hover:text-white">Home</a>
         <span class="mx-2">/</span>
-        <a href="/v2/portfolio/" class="hover:text-white">Portfolio</a>
+        <a href="/portfolio/" class="hover:text-white">Portfolio</a>
         <span class="mx-2">/</span>
         <span class="text-white">{project.data.title}</span>
       </nav>
@@ -142,7 +142,7 @@ const fullImageUrl = imageSrc.startsWith('http')
   <!-- Back to Portfolio -->
   <section class="py-8">
     <div class="max-w-4xl mx-auto px-4">
-      <a href="/v2/portfolio/" class="inline-flex items-center text-[var(--accent-wood)] font-semibold hover:underline">
+      <a href="/portfolio/" class="inline-flex items-center text-[var(--accent-wood)] font-semibold hover:underline">
         <svg xmlns="http://www.w3.org/2000/svg" class="mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>

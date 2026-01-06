@@ -10,11 +10,11 @@ const {
   title, 
   description, 
   canonicalPath = '', 
-  ogImage = '/v2/i/logo-16x9.png' 
+  ogImage = '/i/logo-16x9.png' 
 } = Astro.props;
 
 const siteUrl = 'https://jrobertson-joiners.co.uk';
-const canonicalUrl = `${siteUrl}/v2${canonicalPath}`;
+const canonicalUrl = `${siteUrl}${canonicalPath}`;
 const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 
 import '../styles/global.css';
@@ -37,9 +37,6 @@ import StickyCTA from '../components/StickyCTA.astro';
   <meta name="geo.position" content="56.15516;-4.12703" />
   <meta name="ICBM" content="56.15516, -4.12703" />
 
-  <!-- Block indexing until launch - REMOVE WHEN GOING LIVE -->
-  <meta name="robots" content="noindex, nofollow" />
-  
   <!-- Additional SEO meta tags -->
   <meta name="author" content="Jamie Robertson Joiners" />
   <meta name="publisher" content="Jamie Robertson Joiners" />

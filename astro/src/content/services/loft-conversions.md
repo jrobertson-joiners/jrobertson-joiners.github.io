@@ -52,4 +52,4 @@ Our loft conversion service typically covers:
 
 As joiners by trade, we bring a craftsman's eye to the structural timber work and internal finishings that make a loft conversion feel like a natural part of your home – not an afterthought.
 
-[Contact us](/v2/contact/) to discuss your loft conversion project.
+[Contact us](/contact/) to discuss your loft conversion project.

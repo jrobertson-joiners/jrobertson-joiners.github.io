@@ -1,4 +1,4 @@
-name: Deploy Astro to /v2/ subdirectory
+name: Deploy Astro Site
 
 on:
   push:
@@ -39,22 +39,10 @@ jobs:
         working-directory: ./astro
         run: npm run build
 
-      - name: Download existing site
-        run: |
-          # Create a combined dist folder
-          mkdir -p combined-dist
-          
-          # Copy all root-level files (legacy site) except v2/
-          rsync -av --exclude='astro/' --exclude='.git/' --exclude='combined-dist/' --exclude='new/' ./ combined-dist/
-          
-          # Copy the built Astro site to the v2 subfolder
-          mkdir -p combined-dist/v2
-          cp -r astro/dist/* combined-dist/v2/
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./combined-dist
+          path: ./astro/dist
 
   deploy:
     environment:

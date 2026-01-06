@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 const { service } = Astro.props;
 const { Content } = await service.render();
 
-const serviceUrl = `https://jrobertson-joiners.co.uk/v2/services/${service.slug}/`;
+const serviceUrl = `https://jrobertson-joiners.co.uk/services/${service.slug}/`;
 const areas = service.data.areas || ['Stirling', 'Bridge of Allan', 'Dunblane', 'Bannockburn'];
 ---
 
@@ -36,8 +36,8 @@ const areas = service.data.areas || ['Stirling', 'Bridge of Allan', 'Dunblane', 
       areaServed={areas}
     />
     <BreadcrumbSchema items={[
-      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/v2/' },
-      { name: 'Services', url: 'https://jrobertson-joiners.co.uk/v2/services/' },
+      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/' },
+      { name: 'Services', url: 'https://jrobertson-joiners.co.uk/services/' },
       { name: service.data.title, url: serviceUrl }
     ]} />
   </Fragment>
@@ -45,9 +45,9 @@ const areas = service.data.areas || ['Stirling', 'Bridge of Allan', 'Dunblane', 
   <section class="bg-[var(--primary-dark)] text-white py-16">
     <div class="max-w-6xl mx-auto px-4">
       <nav class="text-sm text-white/60 mb-4">
-        <a href="/v2/" class="hover:text-white">Home</a>
+        <a href="/" class="hover:text-white">Home</a>
         <span class="mx-2">/</span>
-        <a href="/v2/services/" class="hover:text-white">Services</a>
+        <a href="/services/" class="hover:text-white">Services</a>
         <span class="mx-2">/</span>
         <span class="text-white">{service.data.title}</span>
       </nav>
