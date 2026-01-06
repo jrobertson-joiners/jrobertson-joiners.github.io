@@ -11,7 +11,7 @@ export default defineConfig({
   // Integrations
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/404'),  // Exclude 404 from sitemap
+      filter: (page) => !page.includes('/404') && !page.includes('/portfolio'),  // Exclude 404 and portfolio from sitemap
     }),
   ],
 

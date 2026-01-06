@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import ServiceCard from '../components/ServiceCard.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+// import ProjectCard from '../components/ProjectCard.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 import OrganizationSchema from '../components/schema/OrganizationSchema.astro';
 import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
@@ -10,7 +10,7 @@ import aboutTeamImage from '../assets/images/about-team.jpg';
 import { getCollection } from 'astro:content';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
-const featuredProjects = (await getCollection('projects')).filter(p => p.data.featured);
+// const featuredProjects = (await getCollection('projects')).filter(p => p.data.featured);
 ---
 
 <Base
@@ -128,7 +128,7 @@ const featuredProjects = (await getCollection('projects')).filter(p => p.data.fe
     </div>
   </section>
 
-  <!-- Featured Projects Section -->
+  <!-- Featured Projects Section 
   {featuredProjects.length > 0 && (
     <section class="py-16 bg-[var(--light-gray)]">
       <div class="max-w-6xl mx-auto px-4">
@@ -153,7 +153,7 @@ const featuredProjects = (await getCollection('projects')).filter(p => p.data.fe
         </div>
       </div>
     </section>
-  )}
+  )} -->
 
   <!-- Contact CTA Section -->
   <section class="py-16">
