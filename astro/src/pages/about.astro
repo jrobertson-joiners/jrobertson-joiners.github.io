@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import ContactCTA from '../components/ContactCTA.astro';
+import AreasSection from '../components/AreasSection.astro';
 import OrganizationSchema from '../components/schema/OrganizationSchema.astro';
 import AboutSchema from '../components/schema/AboutSchema.astro';
 import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
@@ -120,22 +121,7 @@ import aboutTeamImage from '../assets/images/about-team.jpg';
   </section>
 
   <!-- Areas Served Section -->
-  <section class="py-16">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-2xl font-bold text-slate-900 mb-4">Areas We Cover</h2>
-      <p class="text-slate-600 mb-6">
-        Based in Stirling (FK8), we regularly work across the surrounding Central Scotland area:
-      </p>
-      <ul class="grid gap-2 text-slate-700 sm:grid-cols-2 md:grid-cols-4">
-        {['Stirling', 'Bridge of Allan', 'Dunblane', 'Bannockburn', 'Cowie', 'Plean', 'Thornhill', 'Deanston', 'Doune', 'Aberfoyle', 'Callander', 'The Trossachs area'].map(area => (
-          <li class="flex items-center gap-2">
-            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)]"></span>
-            {area}
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
+  <AreasSection />
 
   <!-- Contact CTA Section -->
   <section class="py-16 bg-[var(--light-gray)]">

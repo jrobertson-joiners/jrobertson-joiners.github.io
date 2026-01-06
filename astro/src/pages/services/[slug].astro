@@ -1,10 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
+import AreasSection from '../../components/AreasSection.astro';
 import OrganizationSchema from '../../components/schema/OrganizationSchema.astro';
 import ServiceSchema from '../../components/schema/ServiceSchema.astro';
 import BreadcrumbSchema from '../../components/schema/BreadcrumbSchema.astro';
 import { getCollection } from 'astro:content';
+import { serviceAreas } from '../../data/areas';
 
 export async function getStaticPaths() {
   const services = await getCollection('services');
@@ -18,7 +20,7 @@ const { service } = Astro.props;
 const { Content } = await service.render();
 
 const serviceUrl = `https://jrobertson-joiners.co.uk/services/${service.slug}/`;
-const areas = service.data.areas || ['Stirling', 'Bridge of Allan', 'Dunblane', 'Bannockburn'];
+const areas = [...serviceAreas];
 ---
 
 <Base
@@ -66,22 +68,7 @@ const areas = service.data.areas || ['Stirling', 'Bridge of Allan', 'Dunblane', 
   </section>
 
   <!-- Areas Covered -->
-  {service.data.areas && service.data.areas.length > 0 && (
-    <section class="py-16 bg-[var(--light-gray)]">
-      <div class="max-w-4xl mx-auto px-4">
-        <h2 class="text-2xl font-bold text-slate-900 mb-4">Service Areas</h2>
-        <p class="text-slate-600 mb-6">We provide {service.data.title.toLowerCase()} services across:</p>
-        <ul class="grid gap-2 text-slate-700 sm:grid-cols-2 md:grid-cols-3">
-          {service.data.areas.map((area: string) => (
-            <li class="flex items-center gap-2">
-              <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)]"></span>
-              {area}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )}
+  <AreasSection background="bg-[var(--light-gray)]" />
 
   <!-- Contact CTA -->
   <section class="py-16">

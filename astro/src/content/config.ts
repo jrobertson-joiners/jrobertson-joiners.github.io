@@ -9,7 +9,6 @@ const servicesCollection = defineCollection({
     icon: z.string(),
     order: z.number(),
     image: image().optional(),
-    areas: z.array(z.string()).optional(),
   }),
 });
 

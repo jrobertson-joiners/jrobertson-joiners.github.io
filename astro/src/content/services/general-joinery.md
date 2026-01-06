@@ -5,14 +5,6 @@ shortDescription: "Doors, flooring, staircases, bespoke storage, and all aspects
 icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M6 7v10M18 7v10M4 17h16" /></svg>'
 order: 4
 image: "../../assets/images/services/about-team.jpg"
-areas:
-  - Stirling
-  - Bridge of Allan
-  - Dunblane
-  - Bannockburn
-  - Doune
-  - Callander
-  - Aberfoyle
 ---
 
 ## General Joinery Services in Stirling

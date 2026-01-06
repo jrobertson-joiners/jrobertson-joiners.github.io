@@ -1,4 +1,6 @@
 ---
+import { serviceAreas } from '../../data/areas';
+
 /**
  * Shared organization schema - referenced by all pages
  * This establishes the business identity for Google
@@ -58,24 +60,7 @@ const organizationSchema = {
       },
       "geoRadius": "40000"
     },
-    { "@type": "City", "name": "Stirling" },
-    { "@type": "City", "name": "Bridge of Allan" },
-    { "@type": "City", "name": "Dunblane" },
-    { "@type": "City", "name": "Bannockburn" },
-    { "@type": "City", "name": "Doune" },
-    { "@type": "City", "name": "Callander" },
-    { "@type": "City", "name": "Cowie" },
-    { "@type": "City", "name": "Plean" },
-    { "@type": "City", "name": "Thornhill" },
-    { "@type": "City", "name": "Deanston" },
-    { "@type": "City", "name": "Aberfoyle" },
-    { "@type": "City", "name": "Fallin" },
-    { "@type": "City", "name": "Cambusbarron" },
-    { "@type": "City", "name": "St Ninians" },
-    { "@type": "City", "name": "Alloa" },
-    { "@type": "City", "name": "Tullibody" },
-    { "@type": "City", "name": "Kippen" },
-    { "@type": "City", "name": "Blair Drummond" }
+    ...serviceAreas.map(area => ({ "@type": "City", "name": area }))
   ],
   "openingHoursSpecification": [
     {
