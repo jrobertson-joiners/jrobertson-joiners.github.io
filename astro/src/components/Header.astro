@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logoImage from '../assets/images/logo.png';
+import { MENU_LINKS } from '../data/site';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -10,7 +11,7 @@ const currentPath = Astro.url.pathname;
     <a href="/" class="text-lg md:text-xl font-semibold text-slate-900 flex items-center gap-2">
       <Image 
         src={logoImage} 
-        alt="Jamie Robertson Joiners and Building Contractor Logo" 
+        alt="Jamie Robertson Joiners" 
         width={320}
         quality={100}
         format="png"
@@ -23,10 +24,9 @@ const currentPath = Astro.url.pathname;
 
     <!-- Desktop Nav -->
     <nav class="hidden md:flex items-center gap-6 text-sm font-medium" aria-label="Main navigation">
-      <a href="/services/" class="hover:text-[var(--accent-wood)]">Services</a>
-      <!-- Portfolio temporarily disabled -->
-      <a href="/about/" class="hover:text-[var(--accent-wood)]">About</a>
-      <a href="/contact/" class="hover:text-[var(--accent-wood)]">Contact</a>
+      {MENU_LINKS.map(link => (
+        <a href={link.href} class="hover:text-[var(--accent-wood)]">{link.label}</a>
+      ))}
     </nav>
 
     <div class="flex items-center gap-4">
@@ -47,10 +47,9 @@ const currentPath = Astro.url.pathname;
   <!-- Mobile Menu Dropdown -->
   <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 py-4 shadow-lg">
     <nav class="flex flex-col space-y-4 text-sm font-medium" aria-label="Mobile navigation">
-      <a href="/services/" class="block hover:text-[var(--accent-wood)]">Services</a>
-      <!-- Portfolio temporarily disabled -->
-      <a href="/about/" class="block hover:text-[var(--accent-wood)]">About</a>
-      <a href="/contact/" class="block hover:text-[var(--accent-wood)]">Contact</a>
+      {MENU_LINKS.map(link => (
+        <a href={link.href} class="block hover:text-[var(--accent-wood)]">{link.label}</a>
+      ))}
       <a href="/contact/"
         class="block w-full text-center rounded-full bg-[var(--accent-wood)] px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-orange-700">Get in Touch</a>
     </nav>

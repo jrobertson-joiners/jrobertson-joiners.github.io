@@ -1,4 +1,5 @@
 ---
+import { SITE, MENU_LINKS } from '../data/site';
 const currentYear = new Date().getFullYear();
 ---
 
@@ -7,13 +8,12 @@ const currentYear = new Date().getFullYear();
     <p>© {currentYear} Jamie Robertson Joiners. All rights reserved.</p>
     <div class="flex gap-6 flex-wrap items-center">
       <a href="/" class="hover:text-[var(--accent-wood)]">Home</a>
-      <a href="/services/" class="hover:text-[var(--accent-wood)]">Services</a>
-      <!-- Portfolio temporarily disabled -->
-      <a href="/about/" class="hover:text-[var(--accent-wood)]">About</a>
-      <a href="/contact/" class="hover:text-[var(--accent-wood)]">Contact</a>
-      <a href="https://www.facebook.com/jrobertsonjoiners2016" class="hover:text-[var(--accent-wood)]" target="_blank"
+      {MENU_LINKS.map(link => (
+        <a href={link.href} class="hover:text-[var(--accent-wood)]">{link.label}</a>
+      ))}
+      <a href={SITE.social.facebook} class="hover:text-[var(--accent-wood)]" target="_blank"
         rel="noreferrer noopener">Facebook</a>
-      <a href="https://wa.me/447917113063" class="hover:text-[var(--accent-wood)]" target="_blank"
+      <a href={SITE.whatsappUrl} class="hover:text-[var(--accent-wood)]" target="_blank"
         rel="noreferrer noopener">WhatsApp</a>
     </div>
   </div>

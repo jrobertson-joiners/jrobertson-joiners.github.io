@@ -13,7 +13,8 @@ const {
   ogImage = '/i/logo-16x9.png' 
 } = Astro.props;
 
-const siteUrl = 'https://jrobertson-joiners.co.uk';
+import { SITE } from '../data/site';
+const siteUrl = SITE.url;
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
 const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 
