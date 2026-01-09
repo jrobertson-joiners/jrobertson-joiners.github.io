@@ -6,7 +6,7 @@ import ContactCTA from '../components/ContactCTA.astro';
 import OrganizationSchema from '../components/schema/OrganizationSchema.astro';
 import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
 import { Image } from 'astro:assets';
-import aboutTeamImage from '../assets/images/about-team.jpg';
+import aboutTeamImage from '../assets/images/entryway.jpg';
 import { getCollection } from 'astro:content';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
