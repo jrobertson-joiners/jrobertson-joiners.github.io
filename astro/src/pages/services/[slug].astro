@@ -1,36 +1,48 @@
 ---
 import Base from '../../layouts/Base.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import AreasSection from '../../components/AreasSection.astro';
 import OrganizationSchema from '../../components/schema/OrganizationSchema.astro';
 import ServiceSchema from '../../components/schema/ServiceSchema.astro';
 import BreadcrumbSchema from '../../components/schema/BreadcrumbSchema.astro';
-import { getCollection } from 'astro:content';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import FAQAccordion from '../../components/FAQAccordion.astro';
+import { getCollection, render } from 'astro:content';
 import { serviceAreas } from '../../data/areas';
+import { absUrl } from '../../data/site';
+import { serviceFaqs } from '../../data/serviceFaqs';
 
 export async function getStaticPaths() {
-  const services = await getCollection('services');
+  const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
   return services.map(service => ({
-    params: { slug: service.slug },
+    params: { slug: service.id },
     props: { service },
   }));
 }
 
 const { service } = Astro.props;
-const { Content } = await service.render();
+const { Content } = await render(service);
 
-const serviceUrl = `https://jrobertson-joiners.co.uk/services/${service.slug}/`;
+const serviceUrl = absUrl(`/services/${service.id}/`);
 const areas = [...serviceAreas];
+const faqs = serviceFaqs[service.id] ?? [];
+// getCollection is cached within a build, so re-querying here is cheap and
+// avoids threading the whole list through getStaticPaths props.
+const relatedServices = (await getCollection('services'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .filter(s => s.id !== service.id);
 ---
 
 <Base
   title={`${service.data.title} | Jamie Robertson Joiners`}
   description={service.data.description}
-  canonicalPath={`/services/${service.slug}/`}
+  canonicalPath={`/services/${service.id}/`}
+  ogType="article"
 >
   <Fragment slot="head">
     <OrganizationSchema />
-    <ServiceSchema 
+    <ServiceSchema
       name={service.data.title}
       description={service.data.description}
       url={serviceUrl}
@@ -38,19 +50,20 @@ const areas = [...serviceAreas];
       areaServed={areas}
     />
     <BreadcrumbSchema items={[
-      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/' },
-      { name: 'Services', url: 'https://jrobertson-joiners.co.uk/services/' },
-      { name: service.data.title, url: serviceUrl }
+      { name: 'Home', path: '/' },
+      { name: 'Services', path: '/services/' },
+      { name: service.data.title, path: `/services/${service.id}/` }
     ]} />
+    {faqs.length > 0 && <FAQSchema faqs={faqs} />}
   </Fragment>
   <!-- Hero Section -->
   <section class="bg-[var(--primary-dark)] text-white py-16">
     <div class="max-w-6xl mx-auto px-4">
-      <nav class="text-sm text-white/60 mb-4">
+      <nav class="text-sm text-white/70 mb-4" aria-label="Breadcrumb">
         <a href="/" class="hover:text-white">Home</a>
-        <span class="mx-2">/</span>
+        <span class="mx-2" aria-hidden="true">/</span>
         <a href="/services/" class="hover:text-white">Services</a>
-        <span class="mx-2">/</span>
+        <span class="mx-2" aria-hidden="true">/</span>
         <span class="text-white">{service.data.title}</span>
       </nav>
       <h1 class="text-4xl md:text-5xl font-bold mb-4">{service.data.title}</h1>
@@ -66,6 +79,35 @@ const areas = [...serviceAreas];
       </article>
     </div>
   </section>
+
+  <!-- Service FAQs -->
+  {faqs.length > 0 && (
+    <section class="py-16 bg-[var(--light-gray)]">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
+        <FAQAccordion faqs={faqs} />
+      </div>
+    </section>
+  )}
+
+  <!-- Related Services -->
+  {relatedServices.length > 0 && (
+    <section class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl font-bold text-slate-900 mb-8">Other services we offer</h2>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {relatedServices.map(s => (
+            <ServiceCard
+              title={s.data.title}
+              description={s.data.shortDescription}
+              icon={s.data.icon}
+              href={`/services/${s.id}/`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- Areas Covered -->
   <AreasSection background="bg-[var(--light-gray)]" />

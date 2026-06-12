@@ -1,4 +1,6 @@
 ---
+import { SITE, ORG_ID, absUrl } from '../../data/site';
+
 interface Props {
   name: string;
   description: string;
@@ -18,7 +20,7 @@ const schema = {
   "description": description,
   "serviceType": serviceType,
   "provider": {
-    "@id": "https://jrobertson-joiners.co.uk/#organization"
+    "@id": ORG_ID
   },
   "areaServed": areaServed.map(area => ({
     "@type": "City",
@@ -26,11 +28,11 @@ const schema = {
   })),
   "availableChannel": {
     "@type": "ServiceChannel",
-    "serviceUrl": "https://jrobertson-joiners.co.uk/contact/",
-    "servicePhone": "+44-7917-113063"
+    "serviceUrl": absUrl("/contact/"),
+    "servicePhone": SITE.phoneTel
   },
   ...(image && { "image": image })
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

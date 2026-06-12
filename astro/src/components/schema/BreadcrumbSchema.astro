@@ -1,7 +1,10 @@
 ---
+import { absUrl } from '../../data/site';
+
 interface BreadcrumbItem {
   name: string;
-  url: string;
+  /** Root-relative path, e.g. '/services/'. Resolved against SITE.url. */
+  path: string;
 }
 
 interface Props {
@@ -17,9 +20,9 @@ const schema = {
     "@type": "ListItem",
     "position": index + 1,
     "name": item.name,
-    "item": item.url
+    "item": absUrl(item.path)
   }))
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

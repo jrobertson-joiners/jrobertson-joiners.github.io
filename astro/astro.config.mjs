@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -15,12 +15,40 @@ export default defineConfig({
     }),
   ],
 
+  // Self-hosted Inter via the Fonts API (stable in Astro 6). Astro fingerprints
+  // the file, manages the <link rel="preload">, and generates a metric-matched
+  // fallback font to minimise layout shift (CLS) while Inter loads.
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: 'Inter',
+      cssVariable: '--font-inter',
+      fallbacks: ['sans-serif'],   // last generic entry → optimized fallback metrics
+      options: {
+        variants: [
+          {
+            weight: '100 900',     // single variable font covers the full weight range
+            style: 'normal',
+            src: ['./src/assets/fonts/Inter.woff2'],
+          },
+        ],
+      },
+    },
+  ],
+
   // Image optimization with Sharp
   image: {
+    // Responsive images (stable in Astro 6): auto-generate srcset/sizes so each
+    // device downloads an appropriately sized image. `responsiveStyles` adds the
+    // low-specificity layout CSS (author classes still win).
+    layout: 'constrained',
+    responsiveStyles: true,
     service: {
       entrypoint: 'astro/assets/services/sharp',
       config: {
-        limitInputPixels: false,  // Allow large images
+        // Bounded ceiling (generous for legitimate project photos) rather than
+        // disabling Sharp's decompression-bomb guard entirely.
+        limitInputPixels: 100_000_000,
       },
     },
   },
@@ -28,7 +56,7 @@ export default defineConfig({
   // Build optimizations
   compressHTML: true,           // Minify HTML output
   build: {
-    inlineStylesheets: 'auto',  // Inline small CSS for faster FCP
+    inlineStylesheets: 'auto',  // Inline only small CSS; keep the shared bundle external and cacheable across pages
   },
 
   // Prefetch links on hover for faster navigation
@@ -38,7 +66,9 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [tailwindcss()],
+    // Cast: @tailwindcss/vite and Astro can resolve different Vite type
+    // versions, producing a spurious Plugin-type mismatch under `astro check`.
+    plugins: [/** @type {any} */ (tailwindcss())],
     build: {
       // Improve CSS output
       cssMinify: 'lightningcss',

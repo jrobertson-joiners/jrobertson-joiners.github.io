@@ -1,5 +1,6 @@
 ---
 import { serviceAreas } from '../../data/areas';
+import { SITE, ORG_ID, absUrl } from '../../data/site';
 
 /**
  * Shared organization schema - referenced by all pages
@@ -13,30 +14,30 @@ const { includeWebsite = false } = Astro.props;
 
 const organizationSchema = {
   "@type": "HomeAndConstructionBusiness",
-  "@id": "https://jrobertson-joiners.co.uk/#organization",
-  "name": "Jamie Robertson Joiners",
+  "@id": ORG_ID,
+  "name": SITE.title,
   "alternateName": "J Robertson Joiners",
   "image": [
-    "https://jrobertson-joiners.co.uk/i/logo-1x1.png",
-    "https://jrobertson-joiners.co.uk/i/logo-4x3.png",
-    "https://jrobertson-joiners.co.uk/i/logo-16x9.png"
+    absUrl("/i/logo-1x1.png"),
+    absUrl("/i/logo-4x3.png"),
+    absUrl("/i/logo-16x9.png")
   ],
   "logo": {
     "@type": "ImageObject",
-    "url": "https://jrobertson-joiners.co.uk/i/logo.png",
-    "width": 512,
-    "height": 512
+    "url": absUrl("/i/logo.png"),
+    "width": 1200,
+    "height": 1200
   },
-  "telephone": "+44-7917-113063",
-  "email": "info@jrobertson-joiners.co.uk",
-  "url": "https://jrobertson-joiners.co.uk/",
+  "telephone": SITE.phoneTel,
+  "email": SITE.email,
+  "url": absUrl("/"),
   "priceRange": "££",
   "currenciesAccepted": "GBP",
   "paymentAccepted": "Cash, Bank Transfer",
-  "foundingDate": "2016-03",
+  "foundingDate": `${SITE.foundingYear}-03`,
   "founder": {
     "@type": "Person",
-    "name": "Jamie Robertson"
+    "name": SITE.author
   },
   "address": {
     "@type": "PostalAddress",
@@ -47,16 +48,16 @@ const organizationSchema = {
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": "56.15516",
-    "longitude": "-4.12703"
+    "latitude": SITE.geo.lat,
+    "longitude": SITE.geo.lng
   },
   "areaServed": [
     {
       "@type": "GeoCircle",
       "geoMidpoint": {
         "@type": "GeoCoordinates",
-        "latitude": "56.15516",
-        "longitude": "-4.12703"
+        "latitude": SITE.geo.lat,
+        "longitude": SITE.geo.lng
       },
       "geoRadius": "40000"
     },
@@ -77,8 +78,8 @@ const organizationSchema = {
     }
   ],
   "sameAs": [
-    "https://www.facebook.com/jrobertsonjoiners2016",
-    "https://wa.me/447917113063"
+    SITE.social.facebook,
+    SITE.whatsappUrl
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
@@ -124,11 +125,11 @@ const organizationSchema = {
 
 const websiteSchema = {
   "@type": "WebSite",
-  "@id": "https://jrobertson-joiners.co.uk/#website",
-  "url": "https://jrobertson-joiners.co.uk/",
+  "@id": `${SITE.url}/#website`,
+  "url": absUrl("/"),
   "name": "Jamie Robertson Joiners & Building Contractor",
   "description": "Joinery-led building contractor in Stirling since 2016.",
-  "publisher": { "@id": "https://jrobertson-joiners.co.uk/#organization" },
+  "publisher": { "@id": ORG_ID },
   "inLanguage": "en-GB"
 };
 
@@ -142,4 +143,4 @@ const schema = {
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import BreadcrumbSchema from '../components/schema/BreadcrumbSchema.astro';
+import OrganizationSchema from '../components/schema/OrganizationSchema.astro';
+import { SITE } from '../data/site';
+---
+
+<Base
+  title="Privacy Policy | Jamie Robertson Joiners"
+  description="How Jamie Robertson Joiners collects, uses and protects the personal information you provide through our website."
+  canonicalPath="/privacy/"
+>
+  <Fragment slot="head">
+    <OrganizationSchema />
+    <BreadcrumbSchema items={[
+      { name: 'Home', path: '/' },
+      { name: 'Privacy Policy', path: '/privacy/' }
+    ]} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <section class="bg-[var(--primary-dark)] text-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm font-semibold text-orange-200 mb-2">Legal</p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Privacy Policy</h1>
+      <p class="text-lg text-white/80 max-w-2xl">
+        How we collect, use and protect the information you share with us.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4">
+      <article class="prose prose-slate prose-lg max-w-none prose-headings:text-slate-900 prose-a:text-[var(--accent-wood)] prose-a:no-underline hover:prose-a:underline">
+        <p><em>Last updated: June 2026</em></p>
+
+        <p>
+          Jamie Robertson Joiners ("we", "us") is committed to protecting your privacy. This policy explains what
+          personal information we collect when you use this website and how we handle it, in line with UK data
+          protection law (UK GDPR and the Data Protection Act 2018).
+        </p>
+
+        <h2>What we collect</h2>
+        <p>
+          If you contact us through the website enquiry form, we collect the details you choose to provide: your name,
+          email address, and optionally your phone number, the type of project, your town or area, and the contents of
+          your message. We do not collect any of this information unless you submit the form.
+        </p>
+
+        <h2>How we use it</h2>
+        <p>
+          We use the information solely to respond to your enquiry, provide a quote, and discuss the work you are
+          interested in. Our lawful basis for processing is our legitimate interest in responding to and managing
+          enquiries about our services. We do not use your details for marketing without your consent, and we do not
+          sell or share your information with third parties for their own purposes.
+        </p>
+
+        <h2>How your enquiry is processed</h2>
+        <p>
+          Our contact form is handled by <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noreferrer noopener">Formspree</a>,
+          which forwards your message to us by email. Formspree is a US-based service and may process your data outside
+          the UK under appropriate safeguards. If you would prefer not to use the form, you can contact us directly by
+          phone or email instead.
+        </p>
+
+        <h2>How long we keep it</h2>
+        <p>
+          We keep enquiry correspondence only for as long as needed to deal with your enquiry and any resulting work,
+          plus a reasonable period afterwards for our records, after which it is deleted.
+        </p>
+
+        <h2>Cookies and analytics</h2>
+        <p>
+          This website does not set tracking or advertising cookies and does not run third-party analytics. Some basic
+          technical data may be logged by our hosting provider to deliver and secure the site.
+        </p>
+
+        <h2>Your rights</h2>
+        <p>
+          You have the right to access the personal data we hold about you, to ask us to correct or delete it, and to
+          object to or restrict our use of it. To exercise any of these rights, or if you have a question about this
+          policy, please contact us:
+        </p>
+        <ul>
+          <li>Email: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+          <li>Phone: <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a></li>
+        </ul>
+        <p>
+          If you are unhappy with how we have handled your information, you can also complain to the UK Information
+          Commissioner's Office (ICO) at <a href="https://ico.org.uk/" target="_blank" rel="noreferrer noopener">ico.org.uk</a>.
+        </p>
+
+        <h2>Changes to this policy</h2>
+        <p>
+          We may update this policy from time to time. Any changes will be posted on this page with a revised date.
+        </p>
+      </article>
+    </div>
+  </section>
+</Base>

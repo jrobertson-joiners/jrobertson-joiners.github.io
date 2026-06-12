@@ -1,4 +1,6 @@
 ---
+import { ORG_ID } from '../../data/site';
+
 interface Props {
   name: string;
   description: string;
@@ -18,10 +20,10 @@ const schema = {
   "description": description,
   "image": image,
   "author": {
-    "@id": "https://jrobertson-joiners.co.uk/#organization"
+    "@id": ORG_ID
   },
   "publisher": {
-    "@id": "https://jrobertson-joiners.co.uk/#organization"
+    "@id": ORG_ID
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
@@ -36,4 +38,4 @@ const schema = {
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

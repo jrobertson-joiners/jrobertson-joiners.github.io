@@ -1,14 +1,16 @@
 ---
+import { SITE, ORG_ID, absUrl } from '../../data/site';
+
 const schema = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
-  "@id": "https://jrobertson-joiners.co.uk/about/",
-  "name": "About Jamie Robertson Joiners",
+  "@id": absUrl("/about/"),
+  "name": `About ${SITE.title}`,
   "description": "Learn about Jamie Robertson Joiners - joinery-led building contractors serving Stirling and Central Scotland since 2016.",
   "mainEntity": {
-    "@id": "https://jrobertson-joiners.co.uk/#organization"
+    "@id": ORG_ID
   }
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

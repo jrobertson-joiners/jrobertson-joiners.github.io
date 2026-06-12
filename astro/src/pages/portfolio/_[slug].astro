@@ -5,34 +5,35 @@ import OrganizationSchema from '../../components/schema/OrganizationSchema.astro
 import ProjectSchema from '../../components/schema/ProjectSchema.astro';
 import BreadcrumbSchema from '../../components/schema/BreadcrumbSchema.astro';
 import Lightbox from '../../components/Lightbox.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
+import { absUrl } from '../../data/site';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
   return projects.map(project => ({
-    params: { slug: project.slug },
+    params: { slug: project.id },
     props: { project },
   }));
 }
 
 const { project } = Astro.props;
-const { Content } = await project.render();
+const { Content } = await render(project);
 
-const projectUrl = `https://jrobertson-joiners.co.uk/portfolio/${project.slug}/`;
+const projectUrl = absUrl(`/portfolio/${project.id}/`);
 // Extract image src for schema and og:image - handles both ImageMetadata and string
-const imageSrc = typeof project.data.image === 'string' 
-  ? project.data.image 
+const imageSrc = typeof project.data.image === 'string'
+  ? project.data.image
   : project.data.image.src;
-const fullImageUrl = imageSrc.startsWith('http') 
-  ? imageSrc 
-  : `https://jrobertson-joiners.co.uk${imageSrc}`;
+const fullImageUrl = imageSrc.startsWith('http')
+  ? imageSrc
+  : absUrl(imageSrc);
 ---
 
 <Base
   title={`${project.data.title} | Portfolio | Jamie Robertson Joiners`}
   description={project.data.description}
-  canonicalPath={`/portfolio/${project.slug}/`}
+  canonicalPath={`/portfolio/${project.id}/`}
   ogImage={imageSrc}
 >
   <Fragment slot="head">
@@ -46,9 +47,9 @@ const fullImageUrl = imageSrc.startsWith('http')
       location={project.data.location}
     />
     <BreadcrumbSchema items={[
-      { name: 'Home', url: 'https://jrobertson-joiners.co.uk/' },
-      { name: 'Portfolio', url: 'https://jrobertson-joiners.co.uk/portfolio/' },
-      { name: project.data.title, url: projectUrl }
+      { name: 'Home', path: '/' },
+      { name: 'Portfolio', path: '/portfolio/' },
+      { name: project.data.title, path: `/portfolio/${project.id}/` }
     ]} />
   </Fragment>
   <!-- Hero Section -->

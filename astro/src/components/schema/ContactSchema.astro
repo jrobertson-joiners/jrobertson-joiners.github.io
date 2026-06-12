@@ -1,29 +1,31 @@
 ---
+import { SITE, ORG_ID, absUrl } from '../../data/site';
+
 const schema = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  "@id": "https://jrobertson-joiners.co.uk/contact/",
-  "name": "Contact Jamie Robertson Joiners",
+  "@id": absUrl("/contact/"),
+  "name": `Contact ${SITE.title}`,
   "description": "Get in touch with Jamie Robertson Joiners for a free quote on joinery, kitchens, loft conversions, and building work in Stirling.",
   "mainEntity": {
-    "@id": "https://jrobertson-joiners.co.uk/#organization"
+    "@id": ORG_ID
   },
   "potentialAction": {
     "@type": "CommunicateAction",
     "target": [
       {
         "@type": "EntryPoint",
-        "urlTemplate": "tel:+447917113063",
+        "urlTemplate": `tel:${SITE.phoneTel}`,
         "name": "Call us"
       },
       {
         "@type": "EntryPoint",
-        "urlTemplate": "mailto:info@jrobertson-joiners.co.uk",
+        "urlTemplate": `mailto:${SITE.email}`,
         "name": "Email us"
       },
       {
         "@type": "EntryPoint",
-        "urlTemplate": "https://wa.me/447917113063",
+        "urlTemplate": SITE.whatsappUrl,
         "name": "WhatsApp us"
       }
     ]
@@ -31,4 +33,4 @@ const schema = {
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

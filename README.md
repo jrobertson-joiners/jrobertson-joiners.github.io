@@ -32,4 +32,3 @@ npm run preview
 Automatically deployed via GitHub Actions when changes are pushed to the `master` branch.
 
 See [.github/workflows/astro-deploy.yml](.github/workflows/astro-deploy.yml) for the deployment workflow.
-

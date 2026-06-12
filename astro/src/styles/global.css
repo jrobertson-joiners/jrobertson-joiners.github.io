@@ -2,7 +2,9 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans: 'Inter', sans-serif;
+  /* `--font-inter` is defined by the Fonts API <Font> component and already
+     includes the metric-matched fallback chain. */
+  --font-sans: var(--font-inter);
 }
 
 :root {
@@ -11,16 +13,30 @@
   --light-gray: #f4f4f9;
 }
 
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url('/fonts/Inter.woff2') format('woff2');
-}
-
 html {
   scroll-behavior: smooth;
+}
+
+/* Visible keyboard focus everywhere (WCAG 2.4.7 / 2.4.11). */
+:focus-visible {
+  outline: 2px solid var(--accent-wood);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 .wood-grain {

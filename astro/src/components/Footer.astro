@@ -1,20 +1,53 @@
 ---
-import { SITE, MENU_LINKS } from '../data/site';
+import { SITE, MENU_LINKS, whatsappHref } from '../data/site';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-slate-950 text-white py-6">
-  <div class="max-w-6xl mx-auto px-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-sm">
-    <p>© {currentYear} Jamie Robertson Joiners. All rights reserved.</p>
-    <div class="flex gap-6 flex-wrap items-center">
-      <a href="/" class="hover:text-[var(--accent-wood)]">Home</a>
-      {MENU_LINKS.map(link => (
-        <a href={link.href} class="hover:text-[var(--accent-wood)]">{link.label}</a>
-      ))}
-      <a href={SITE.social.facebook} class="hover:text-[var(--accent-wood)]" target="_blank"
-        rel="noreferrer noopener">Facebook</a>
-      <a href={SITE.whatsappUrl} class="hover:text-[var(--accent-wood)]" target="_blank"
-        rel="noreferrer noopener">WhatsApp</a>
+<footer class="bg-slate-950 text-white">
+  <div class="max-w-6xl mx-auto px-4 py-12 grid gap-10 md:grid-cols-3 text-sm">
+    <!-- Business -->
+    <div>
+      <p class="text-base font-semibold">Jamie Robertson <span class="text-[var(--accent-wood)]">Joiners</span></p>
+      <p class="mt-3 text-white/70 leading-relaxed">
+        Joinery-led building contractor in Stirling since {SITE.foundingYear}. Bespoke kitchens, loft conversions, extensions and full contract builds across Central Scotland.
+      </p>
+    </div>
+
+    <!-- Contact / NAP -->
+    <div>
+      <p class="font-semibold mb-3">Get in touch</p>
+      <ul class="space-y-2 text-white/80">
+        <li>
+          <a href={`tel:${SITE.phoneTel}`} class="inline-block py-1 hover:text-[var(--accent-wood)]">{SITE.phone}</a>
+        </li>
+        <li>
+          <a href={`mailto:${SITE.email}`} class="inline-block py-1 hover:text-[var(--accent-wood)]">{SITE.email}</a>
+        </li>
+        <li class="py-1 text-white/70">Stirling &amp; Central Scotland</li>
+        <li class="py-1 text-white/70">Mon–Fri 8am–6pm &middot; Sat 9am–1pm</li>
+      </ul>
+    </div>
+
+    <!-- Links -->
+    <div>
+      <p class="font-semibold mb-3">Explore</p>
+      <ul class="space-y-1">
+        <li><a href="/" class="inline-block py-1 hover:text-[var(--accent-wood)]">Home</a></li>
+        {MENU_LINKS.map(link => (
+          <li><a href={link.href} class="inline-block py-1 hover:text-[var(--accent-wood)]">{link.label}</a></li>
+        ))}
+        <li><a href="/privacy/" class="inline-block py-1 hover:text-[var(--accent-wood)]">Privacy Policy</a></li>
+      </ul>
+      <div class="mt-3 flex gap-4">
+        <a href={SITE.social.facebook} class="inline-block py-1 hover:text-[var(--accent-wood)]" target="_blank" rel="noreferrer noopener">Facebook</a>
+        <a href={whatsappHref} class="inline-block py-1 hover:text-[var(--accent-wood)]" target="_blank" rel="noreferrer noopener">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4 py-4 text-xs text-white/60">
+      © {currentYear} Jamie Robertson Joiners. All rights reserved.
     </div>
   </div>
 </footer>
