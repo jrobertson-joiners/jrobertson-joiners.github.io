@@ -1,4 +1,5 @@
 ---
+import { getCollection } from 'astro:content';
 import { serviceAreas } from '../data/areas';
 
 interface Props {
@@ -10,6 +11,13 @@ interface Props {
 }
 
 const { background = '' } = Astro.props;
+
+// Map each service area name to its landing page, where one exists.
+const areaPages = await getCollection('areas');
+const pageFor = new Map<string, string>();
+for (const page of areaPages) {
+  for (const name of page.data.covers) pageFor.set(name, `/areas/${page.id}/`);
+}
 ---
 
 <section class:list={['py-16', background]}>
@@ -19,12 +27,18 @@ const { background = '' } = Astro.props;
       Based in Stirling (FK8), we regularly work across the surrounding Central Scotland area:
     </p>
     <ul class="grid gap-2 text-slate-700 sm:grid-cols-2 md:grid-cols-4">
-      {serviceAreas.map(area => (
-        <li class="flex items-center gap-2">
-          <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)]"></span>
-          {area}
-        </li>
-      ))}
+      {serviceAreas.map(area => {
+        const href = pageFor.get(area);
+        return (
+          <li class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent-wood)]"></span>
+            {href ? <a href={href} class="hover:text-[var(--accent-wood)] hover:underline">{area}</a> : area}
+          </li>
+        );
+      })}
     </ul>
+    <p class="mt-6 text-sm">
+      <a href="/areas/" class="font-medium text-[var(--accent-wood)] hover:underline">See all the areas we cover</a>
+    </p>
   </div>
 </section>

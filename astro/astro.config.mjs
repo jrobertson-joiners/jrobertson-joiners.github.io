@@ -2,6 +2,14 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import { SITE } from './src/data/site';
+
+// Google Analytics 4 hosts, per Google's CSP guide for gtag.js
+// (developers.google.com/tag-platform/security/guides/csp). Only added when a
+// measurement ID is configured so the policy stays tight otherwise.
+const gaEnabled = Boolean(SITE.gaMeasurementId);
+const gaImgSrc = gaEnabled ? ' https://*.google-analytics.com https://www.googletagmanager.com' : '';
+const gaConnectSrc = gaEnabled ? ' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com' : '';
 
 // https://astro.build/config
 export default defineConfig({
@@ -68,15 +76,15 @@ export default defineConfig({
   security: {
     csp: {
       scriptDirective: {
-        resources: ["'self'"],
+        resources: gaEnabled ? ["'self'", 'https://www.googletagmanager.com'] : ["'self'"],
       },
       styleDirective: {
         resources: ["'self'"],
       },
       directives: [
-        "img-src 'self' data:",                        // wood-grain background is a data: SVG in global.css
+        `img-src 'self' data:${gaImgSrc}`,                        // wood-grain background is a data: SVG in global.css
         "font-src 'self'",
-        "connect-src 'self' https://formspree.io",     // contact form posts via fetch
+        `connect-src 'self' https://formspree.io${gaConnectSrc}`, // contact form posts via fetch
         "form-action 'self' https://formspree.io",     // no-JS fallback POST
         "base-uri 'self'",
         "object-src 'none'",

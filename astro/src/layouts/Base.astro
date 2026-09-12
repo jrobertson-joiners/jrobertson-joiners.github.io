@@ -21,6 +21,8 @@ import { SITE } from '../data/site';
 const siteUrl = SITE.url;
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
 const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+// Google Analytics 4 is only rendered when a measurement ID is configured.
+const gaId = SITE.gaMeasurementId;
 
 import '../styles/global.css';
 import { Font } from 'astro:assets';
@@ -30,7 +32,7 @@ import StickyCTA from '../components/StickyCTA.astro';
 ---
 
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en-GB" data-ga-id={gaId || undefined}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -76,6 +78,8 @@ import StickyCTA from '../components/StickyCTA.astro';
   <title>{title}</title>
   
   <link rel="preconnect" href="https://formspree.io">
+  {gaId && <link rel="preconnect" href="https://www.googletagmanager.com">}
+  {gaId && <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>}
   <Font cssVariable="--font-inter" preload />
   <link rel="apple-touch-icon" sizes="180x180" href={`${import.meta.env.BASE_URL}i/apple-touch-icon.png`}>
   <link rel="icon" type="image/png" sizes="192x192" href={`${import.meta.env.BASE_URL}i/android-chrome-192x192.png`}>
@@ -100,5 +104,21 @@ import StickyCTA from '../components/StickyCTA.astro';
   <StickyCTA />
 
   <slot name="scripts" />
+
+  <script>
+    // Google Analytics 4 bootstrap. Runs only when <html data-ga-id> is set,
+    // i.e. SITE.gaMeasurementId is configured. Astro bundles this script so it
+    // is covered by the CSP script-src rules; gtag.js itself is loaded from
+    // googletagmanager.com, which astro.config.mjs allows when GA is enabled.
+    const gaId = document.documentElement.dataset.gaId;
+    if (gaId) {
+      const w = window as Window & { dataLayer?: unknown[] };
+      const dataLayer = (w.dataLayer = w.dataLayer ?? []);
+      // gtag.js expects the raw `arguments` object, not a spread array.
+      const gtag = function (..._args: unknown[]) { dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', gaId);
+    }
+  </script>
 </body>
 </html>

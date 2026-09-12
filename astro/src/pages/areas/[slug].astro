@@ -1,0 +1,124 @@
+---
+import Base from '../../layouts/Base.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import OrganizationSchema from '../../components/schema/OrganizationSchema.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import BreadcrumbSchema from '../../components/schema/BreadcrumbSchema.astro';
+import { getCollection, render } from 'astro:content';
+import { absUrl } from '../../data/site';
+
+export async function getStaticPaths() {
+  const areas = (await getCollection('areas')).sort((a, b) => a.data.order - b.data.order);
+  return areas.map(area => ({
+    params: { slug: area.id },
+    props: { area },
+  }));
+}
+
+const { area } = Astro.props;
+const { Content } = await render(area);
+
+const areaPath = `/areas/${area.id}/`;
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const otherAreas = (await getCollection('areas'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .filter(a => a.id !== area.id);
+---
+
+<Base
+  title={`${area.data.seoTitle} | Jamie Robertson Joiners`}
+  description={area.data.description}
+  canonicalPath={areaPath}
+  ogType="article"
+>
+  <Fragment slot="head">
+    <OrganizationSchema />
+    <ServiceSchema
+      name={`Joinery and building services in ${area.data.title}`}
+      description={area.data.description}
+      url={absUrl(areaPath)}
+      serviceType="Joinery and building contractor"
+      areaServed={[...area.data.covers]}
+    />
+    <BreadcrumbSchema items={[
+      { name: 'Home', path: '/' },
+      { name: 'Areas', path: '/areas/' },
+      { name: area.data.title, path: areaPath }
+    ]} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <section class="bg-[var(--primary-dark)] text-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-white/70 mb-4" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-white">Home</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <a href="/areas/" class="hover:text-white">Areas</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <span class="text-white">{area.data.title}</span>
+      </nav>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Joiners &amp; Builders in {area.data.title}</h1>
+      <p class="text-lg text-white/80 max-w-2xl">{area.data.intro}</p>
+      <p class="mt-4 text-sm text-white/70">
+        Postcodes {area.data.postcodes.join(', ')} &middot; Planning and building warrants: {area.data.council}
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <article class="prose prose-slate prose-lg max-w-none prose-headings:text-slate-900 prose-a:text-[var(--accent-wood)] prose-a:no-underline hover:prose-a:underline">
+        <Content />
+      </article>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="py-16 bg-[var(--light-gray)]">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-slate-900 mb-8">Our services in {area.data.title}</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {services.map(s => (
+          <ServiceCard
+            title={s.data.title}
+            description={s.data.shortDescription}
+            icon={s.data.icon}
+            href={`/services/${s.id}/`}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Other areas -->
+  {otherAreas.length > 0 && (
+    <section class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl font-bold text-slate-900 mb-4">Other areas we cover</h2>
+        <ul class="flex flex-wrap gap-3 text-sm">
+          {otherAreas.map(a => (
+            <li>
+              <a href={`/areas/${a.id}/`} class="inline-block rounded-full border border-slate-200 px-4 py-2 text-slate-700 hover:border-[var(--accent-wood)] hover:text-[var(--accent-wood)]">
+                {a.data.title}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href="/areas/" class="inline-block rounded-full border border-slate-200 px-4 py-2 text-slate-700 hover:border-[var(--accent-wood)] hover:text-[var(--accent-wood)]">
+              All areas
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <!-- Contact CTA -->
+  <section class="py-16 bg-[var(--light-gray)]">
+    <div class="max-w-4xl mx-auto px-4">
+      <ContactCTA />
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import AreasSection from '../../components/AreasSection.astro';
+import OrganizationSchema from '../../components/schema/OrganizationSchema.astro';
+import BreadcrumbSchema from '../../components/schema/BreadcrumbSchema.astro';
+import { getCollection } from 'astro:content';
+import { absUrl } from '../../data/site';
+
+const areas = (await getCollection('areas')).sort((a, b) => a.data.order - b.data.order);
+
+const areasListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Areas covered by Jamie Robertson Joiners",
+  "numberOfItems": areas.length,
+  "itemListElement": areas.map((area, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": area.data.title,
+    "url": absUrl(`/areas/${area.id}/`)
+  }))
+};
+---
+
+<Base
+  title="Areas We Cover | Jamie Robertson Joiners"
+  description="Joiners and builders covering Stirling, Dunblane, Bridge of Allan, Callander, Alloa and nearby villages. Find your area and what we do there."
+  canonicalPath="/areas/"
+>
+  <Fragment slot="head">
+    <OrganizationSchema />
+    <BreadcrumbSchema items={[
+      { name: 'Home', path: '/' },
+      { name: 'Areas', path: '/areas/' }
+    ]} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(areasListSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <section class="bg-[var(--primary-dark)] text-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm font-semibold text-orange-200 mb-2">Where we work</p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Areas We Cover</h1>
+      <p class="text-lg text-white/80 max-w-2xl">
+        Based in Stirling, we work across Central Scotland. Pick your area to see the kind of homes we work on there and how planning and building warrants are handled locally.
+      </p>
+    </div>
+  </section>
+
+  <!-- Area cards -->
+  <section class="py-16 bg-[var(--light-gray)]">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {areas.map(area => (
+          <a href={`/areas/${area.id}/`} class="group block rounded-xl bg-white p-6 shadow-lg hover:shadow-xl transition-shadow">
+            <h2 class="text-xl font-semibold text-slate-900 group-hover:text-[var(--accent-wood)] transition-colors">{area.data.title}</h2>
+            <p class="mt-1 text-xs uppercase tracking-wider text-slate-500">{area.data.postcodes.join(' / ')}</p>
+            <p class="mt-3 text-sm text-slate-600">{area.data.intro}</p>
+            <p class="mt-3 text-xs text-slate-500">Covers: {area.data.covers.join(', ')}</p>
+            <span class="mt-4 inline-flex items-center text-sm font-medium text-[var(--accent-wood)]">
+              Joiners in {area.data.title}
+              <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Full list -->
+  <AreasSection />
+
+  <!-- Contact CTA -->
+  <section class="py-16 bg-[var(--light-gray)]">
+    <div class="max-w-4xl mx-auto px-4">
+      <ContactCTA />
+    </div>
+  </section>
+</Base>

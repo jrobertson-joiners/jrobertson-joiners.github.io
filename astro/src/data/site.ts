@@ -1,5 +1,11 @@
 export const SITE = {
   title: 'Jamie Robertson Joiners',
+
+  // Registered company details (Companies House SC530240). The Companies
+  // (Trading Disclosures) Regulations require the registered name, number,
+  // place of registration and registered office to appear on the website.
+  legalName: 'Jamie Robertson Joiners Ltd',
+  companyNumber: 'SC530240',
   url: 'https://jrobertson-joiners.co.uk',
   description: 'Joinery-led building contractor in Stirling since 2016. Specialising in bespoke kitchens, loft conversions, extensions and full contract builds across Central Scotland.',
   author: 'Jamie Robertson',
@@ -36,6 +42,11 @@ export const SITE = {
 
   // "Write a review" deep link for the Google Business Profile.
   googleReviewUrl: 'https://g.page/r/CYy39DmmxQv6EBM/review',
+
+  // Google Analytics 4 measurement ID, e.g. 'G-XXXXXXXXXX'. Leave empty to
+  // disable analytics: no tag is rendered, the privacy policy says no
+  // analytics runs, and the CSP does not allow the Google hosts.
+  gaMeasurementId: 'G-R33LZFKRGS',
 };
 
 /** Absolute URL helper, e.g. absUrl('/contact/') -> 'https://.../contact/'. */
@@ -49,6 +60,7 @@ export const whatsappHref = `${SITE.whatsappUrl}?text=${encodeURIComponent(SITE.
 
 export const MENU_LINKS = [
   { label: 'Services', href: '/services/' },
+  { label: 'Areas', href: '/areas/' },
   { label: 'About', href: '/about/' },
   { label: 'Contact', href: '/contact/' }, // Contact is usually last
 ];
