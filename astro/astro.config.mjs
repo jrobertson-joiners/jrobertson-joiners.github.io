@@ -8,6 +8,13 @@ import { SITE } from './src/data/site';
 // (developers.google.com/tag-platform/security/guides/csp). Only added when a
 // measurement ID is configured so the policy stays tight otherwise.
 const gaEnabled = Boolean(SITE.gaMeasurementId);
+
+// Cloudflare Web Analytics beacon. The domain is proxied through Cloudflare,
+// whose "automatic setup" injects the beacon script into HTML responses. Hosts
+// per Cloudflare's CSP reference (fundamentals > content-security-policies).
+// Remove these two if Web Analytics is switched off in the Cloudflare dashboard.
+const cfInsightsScript = 'https://static.cloudflareinsights.com';
+const cfInsightsConnect = 'https://cloudflareinsights.com';
 const gaImgSrc = gaEnabled ? ' https://*.google-analytics.com https://www.googletagmanager.com' : '';
 const gaConnectSrc = gaEnabled ? ' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com' : '';
 
@@ -76,7 +83,7 @@ export default defineConfig({
   security: {
     csp: {
       scriptDirective: {
-        resources: gaEnabled ? ["'self'", 'https://www.googletagmanager.com'] : ["'self'"],
+        resources: ["'self'", cfInsightsScript, ...(gaEnabled ? ['https://www.googletagmanager.com'] : [])],
       },
       styleDirective: {
         resources: ["'self'"],
@@ -84,7 +91,7 @@ export default defineConfig({
       directives: [
         `img-src 'self' data:${gaImgSrc}`,                        // wood-grain background is a data: SVG in global.css
         "font-src 'self'",
-        `connect-src 'self' https://formspree.io${gaConnectSrc}`, // contact form posts via fetch
+        `connect-src 'self' https://formspree.io ${cfInsightsConnect}${gaConnectSrc}`, // contact form fetch, CF beacon, GA
         "form-action 'self' https://formspree.io",     // no-JS fallback POST
         "base-uri 'self'",
         "object-src 'none'",
