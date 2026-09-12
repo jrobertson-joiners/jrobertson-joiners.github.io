@@ -29,7 +29,13 @@ export const SITE = {
 
   social: {
     facebook: 'https://www.facebook.com/jrobertsonjoiners2016',
+    // Google Business Profile (Maps listing). CID 18017712051953383308,
+    // Place ID ChIJ5YN8xUzQQWkRjLf0OabFC_o.
+    google: 'https://maps.google.com/?cid=18017712051953383308',
   },
+
+  // "Write a review" deep link for the Google Business Profile.
+  googleReviewUrl: 'https://g.page/r/CYy39DmmxQv6EBM/review',
 };
 
 /** Absolute URL helper, e.g. absUrl('/contact/') -> 'https://.../contact/'. */

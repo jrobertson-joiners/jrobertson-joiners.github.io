@@ -6,12 +6,14 @@ Website for Jamie Robertson Joiners - joinery-led building contractor in Stirlin
 
 ## Tech Stack
 
-- **Framework:** [Astro](https://astro.build/) v5
+- **Framework:** [Astro](https://astro.build/) v7 (7.3.2)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/) v4
 - **Hosting:** GitHub Pages
 - **Image Optimization:** Sharp
 
 ## Development
+
+Node 22.12.0 is pinned in `astro/.nvmrc` (`nvm use` picks it up).
 
 ```bash
 cd astro
@@ -20,6 +22,8 @@ npm run dev
 ```
 
 ## Build
+
+`npm run build` runs `astro check` (type-checking) before `astro build`.
 
 ```bash
 cd astro

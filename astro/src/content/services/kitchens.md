@@ -1,6 +1,7 @@
 ---
 title: "Bespoke Kitchen Installation in Stirling"
-description: "Expert kitchen fitting and bespoke installation in Stirling, Dunblane, and Bridge of Allan. Precision cabinet fitting, worktops, and full kitchen renovations."
+seoTitle: "Bespoke Kitchen Fitting Stirling"
+description: "Expert kitchen fitting in Stirling, Dunblane and Bridge of Allan. Precision cabinet fitting, worktops, appliance integration and full kitchen renovations."
 shortDescription: "Precision cabinet fitting, clever storage tweaks, and appliance integration for homes across Stirling and Central Scotland."
 icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9h18M3 15h18M9 3v18M15 3v18" /></svg>'
 order: 1

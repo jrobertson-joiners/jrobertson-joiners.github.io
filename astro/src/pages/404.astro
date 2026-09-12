@@ -6,20 +6,8 @@ import { SITE } from '../data/site';
 <Base
   title="Page Not Found | Jamie Robertson Joiners"
   description="The page you're looking for cannot be found."
-  canonicalPath="/404/"
+  noindex
 >
-  <!-- Redirect script for legacy URLs -->
-  <script is:inline>
-    const redirects = {
-      '/about-us/': '/about/',
-      '/about-us': '/about/',
-    };
-    const path = window.location.pathname;
-    if (redirects[path]) {
-      window.location.replace(redirects[path]);
-    }
-  </script>
-
   <section class="py-16 md:py-24">
     <div class="max-w-2xl mx-auto px-4 text-center">
       <!-- Error Icon -->

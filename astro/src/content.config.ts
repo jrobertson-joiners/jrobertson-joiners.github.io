@@ -6,6 +6,7 @@ const servicesCollection = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/services' }),
   schema: z.object({
     title: z.string(),
+    seoTitle: z.string().optional(),
     description: z.string(),
     shortDescription: z.string(),
     icon: z.string(),

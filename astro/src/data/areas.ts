@@ -25,3 +25,11 @@ export const serviceAreas = [
 ] as const;
 
 export type ServiceArea = (typeof serviceAreas)[number];
+
+/**
+ * schema.org type for an area when it appears in an `areaServed` entry.
+ * Most entries are towns or villages (City); The Trossachs is a region (Place).
+ */
+export function areaSchemaType(area: string): 'City' | 'Place' {
+  return area === 'The Trossachs' ? 'Place' : 'City';
+}

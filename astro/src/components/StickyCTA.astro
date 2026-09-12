@@ -9,7 +9,7 @@ import WhatsAppIcon from './icons/WhatsAppIcon.astro';
 ---
 
 <!-- Sticky Mobile CTA - only visible on mobile -->
-<div id="sticky-cta" class="fixed left-4 right-4 z-40 md:hidden translate-y-24 opacity-0 transition-all duration-300" style="bottom: calc(1rem + env(safe-area-inset-bottom));">
+<div id="sticky-cta" class="fixed left-4 right-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40 md:hidden invisible translate-y-24 opacity-0 transition-all duration-300">
   <div class="flex gap-2">
     <a
       href={`tel:${SITE.phoneTel}`}
@@ -45,10 +45,10 @@ import WhatsAppIcon from './icons/WhatsAppIcon.astro';
     
     // Hide if not scrolled enough OR if footer is visible
     if (scrollY <= showThreshold || footerTop < windowHeight) {
-      stickyCta?.classList.add('translate-y-24', 'opacity-0');
+      stickyCta?.classList.add('invisible', 'translate-y-24', 'opacity-0');
       stickyCta?.classList.remove('translate-y-0', 'opacity-100');
     } else {
-      stickyCta?.classList.remove('translate-y-24', 'opacity-0');
+      stickyCta?.classList.remove('invisible', 'translate-y-24', 'opacity-0');
       stickyCta?.classList.add('translate-y-0', 'opacity-100');
     }
   }

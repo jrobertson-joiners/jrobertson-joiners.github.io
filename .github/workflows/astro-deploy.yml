@@ -6,6 +6,11 @@ on:
     paths:
       - 'astro/**'
       - '.github/workflows/astro-deploy.yml'
+  pull_request:
+    branches: [master]
+    paths:
+      - 'astro/**'
+      - '.github/workflows/astro-deploy.yml'
   workflow_dispatch:
 
 permissions:
@@ -14,7 +19,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -50,6 +55,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    if: github.event_name == 'push'
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

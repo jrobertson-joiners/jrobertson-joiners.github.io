@@ -1,5 +1,5 @@
 ---
-import { serviceAreas } from '../../data/areas';
+import { serviceAreas, areaSchemaType } from '../../data/areas';
 import { SITE, ORG_ID, absUrl } from '../../data/site';
 
 /**
@@ -30,6 +30,14 @@ const organizationSchema = {
   },
   "telephone": SITE.phoneTel,
   "email": SITE.email,
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "telephone": SITE.phoneTel,
+    "email": SITE.email,
+    "url": SITE.whatsappUrl,
+    "availableLanguage": "en"
+  },
   "url": absUrl("/"),
   "priceRange": "££",
   "currenciesAccepted": "GBP",
@@ -43,7 +51,6 @@ const organizationSchema = {
     "@type": "PostalAddress",
     "addressLocality": "Stirling",
     "addressRegion": "Stirlingshire",
-    "postalCode": "FK8",
     "addressCountry": "GB"
   },
   "geo": {
@@ -61,7 +68,7 @@ const organizationSchema = {
       },
       "geoRadius": "40000"
     },
-    ...serviceAreas.map(area => ({ "@type": "City", "name": area }))
+    ...serviceAreas.map(area => ({ "@type": areaSchemaType(area), "name": area }))
   ],
   "openingHoursSpecification": [
     {
@@ -79,7 +86,7 @@ const organizationSchema = {
   ],
   "sameAs": [
     SITE.social.facebook,
-    SITE.whatsappUrl
+    SITE.social.google
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",

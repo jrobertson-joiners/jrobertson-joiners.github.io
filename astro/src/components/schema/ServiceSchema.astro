@@ -1,4 +1,5 @@
 ---
+import { areaSchemaType } from '../../data/areas';
 import { SITE, ORG_ID, absUrl } from '../../data/site';
 
 interface Props {
@@ -23,7 +24,7 @@ const schema = {
     "@id": ORG_ID
   },
   "areaServed": areaServed.map(area => ({
-    "@type": "City",
+    "@type": areaSchemaType(area),
     "name": area
   })),
   "availableChannel": {

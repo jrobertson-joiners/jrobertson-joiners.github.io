@@ -35,7 +35,7 @@ const relatedServices = (await getCollection('services'))
 ---
 
 <Base
-  title={`${service.data.title} | Jamie Robertson Joiners`}
+  title={`${service.data.seoTitle ?? service.data.title} | Jamie Robertson Joiners`}
   description={service.data.description}
   canonicalPath={`/services/${service.id}/`}
   ogType="article"

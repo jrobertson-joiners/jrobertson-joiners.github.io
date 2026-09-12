@@ -8,6 +8,13 @@ export default defineConfig({
   site: 'https://jrobertson-joiners.co.uk',
   base: '/',
 
+  // Legacy URL redirects. With static output Astro emits an HTML page containing a
+  // <meta http-equiv="refresh"> at dist/about-us/index.html, which GitHub Pages
+  // serves for both /about-us and /about-us/.
+  redirects: {
+    '/about-us': '/about/',
+  },
+
   // Integrations
   integrations: [
     sitemap({
@@ -51,6 +58,36 @@ export default defineConfig({
         limitInputPixels: 100_000_000,
       },
     },
+  },
+
+  // Content Security Policy. GitHub Pages cannot send response headers, so the
+  // <meta http-equiv="content-security-policy"> Astro emits is the only option.
+  // Astro adds sha256 hashes for the inline scripts/styles it generates; 'self'
+  // covers the externally bundled /_astro/*.js and /_astro/*.css. default-src is
+  // deliberately not set, and frame-ancestors is ignored in a meta CSP.
+  security: {
+    csp: {
+      scriptDirective: {
+        resources: ["'self'"],
+      },
+      styleDirective: {
+        resources: ["'self'"],
+      },
+      directives: [
+        "img-src 'self' data:",                        // wood-grain background is a data: SVG in global.css
+        "font-src 'self'",
+        "connect-src 'self' https://formspree.io",     // contact form posts via fetch
+        "form-action 'self' https://formspree.io",     // no-JS fallback POST
+        "base-uri 'self'",
+        "object-src 'none'",
+      ],
+    },
+  },
+
+  // No content file uses fenced code blocks, and Shiki's inline styles would
+  // conflict with the CSP hashes above, so syntax highlighting is off.
+  markdown: {
+    syntaxHighlight: false,
   },
 
   // Build optimizations
