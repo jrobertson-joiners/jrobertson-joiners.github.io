@@ -112,12 +112,34 @@ import StickyCTA from '../components/StickyCTA.astro';
     // googletagmanager.com, which astro.config.mjs allows when GA is enabled.
     const gaId = document.documentElement.dataset.gaId;
     if (gaId) {
-      const w = window as Window & { dataLayer?: unknown[] };
-      const dataLayer = (w.dataLayer = w.dataLayer ?? []);
+      const dataLayer = (window.dataLayer = window.dataLayer ?? []);
       // gtag.js expects the raw `arguments` object, not a spread array.
       const gtag = function (..._args: unknown[]) { dataLayer.push(arguments); };
+      // Exposed so page scripts (e.g. the contact form) can fire events.
+      window.gtag = gtag;
       gtag('js', new Date());
       gtag('config', gaId);
+
+      // Lead events: phone and WhatsApp taps anywhere on the site. The contact
+      // form fires `generate_lead` itself (src/pages/contact.astro). All three
+      // must be marked as key events in GA Admin to count as conversions.
+      // `cta_location` comes from the nearest [data-cta-location] ancestor,
+      // falling back to the enclosing landmark.
+      document.addEventListener('click', (event) => {
+        const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href') ?? '';
+        const name = href.startsWith('tel:')
+          ? 'phone_call'
+          : /^https:\/\/(wa\.me|api\.whatsapp\.com)\//.test(href)
+            ? 'whatsapp_click'
+            : null;
+        if (!name) return;
+        const ctaLocation =
+          link.closest<HTMLElement>('[data-cta-location]')?.dataset.ctaLocation ??
+          (link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : 'main');
+        gtag('event', name, { link_url: href, cta_location: ctaLocation });
+      });
     }
   </script>
 </body>

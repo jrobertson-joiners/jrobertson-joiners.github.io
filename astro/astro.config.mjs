@@ -28,6 +28,10 @@ export default defineConfig({
   // serves for both /about-us and /about-us/.
   redirects: {
     '/about-us': '/about/',
+    // The portfolio section is disabled (src/pages/portfolio/_*.astro) but its
+    // old URLs still receive organic traffic; send them to the nearest live page.
+    '/portfolio': '/services/',
+    '/portfolio/torosay-house-build': '/services/',
   },
 
   // Integrations

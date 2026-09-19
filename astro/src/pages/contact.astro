@@ -244,6 +244,7 @@ const fieldClasses =
               reviewUrl ? { href: reviewUrl, text: 'Worked with us before? Leave us a review on Google.' } : undefined
             );
             form.reset();
+            window.gtag?.('event', 'generate_lead', { lead_source: 'contact_form' });
           } else {
             const result = await response.json();
             if (Object.hasOwn(result, 'errors')) {
