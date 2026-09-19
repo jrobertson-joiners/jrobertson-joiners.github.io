@@ -60,6 +60,7 @@ export const whatsappHref = `${SITE.whatsappUrl}?text=${encodeURIComponent(SITE.
 
 export const MENU_LINKS = [
   { label: 'Services', href: '/services/' },
+  { label: 'Portfolio', href: '/portfolio/' },
   { label: 'Areas', href: '/areas/' },
   { label: 'About', href: '/about/' },
   { label: 'Contact', href: '/contact/' }, // Contact is usually last

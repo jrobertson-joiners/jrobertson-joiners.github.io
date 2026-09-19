@@ -2,6 +2,8 @@
 title: "Modern Kitchen Installation"
 description: "A complete kitchen renovation in a Stirling townhouse, featuring handleless cabinets, quartz worktops, and integrated appliances."
 image: "../../assets/images/projects/about-team.jpg"
+# Placeholder photo only; publish once real project photos are added.
+draft: true
 location: "Stirling"
 services:
   - Kitchen Installation

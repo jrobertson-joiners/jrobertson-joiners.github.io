@@ -26,6 +26,9 @@ const projectsCollection = defineCollection({
     services: z.array(z.string()),
     completedDate: z.string(),
     featured: z.boolean().default(false),
+    // Drafts are excluded from every route, list and schema. Used for projects
+    // that still have placeholder photos.
+    draft: z.boolean().default(false),
   }),
 });
 

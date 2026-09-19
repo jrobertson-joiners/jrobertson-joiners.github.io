@@ -7,7 +7,7 @@ import BreadcrumbSchema from '../../components/schema/BreadcrumbSchema.astro';
 import { getCollection } from 'astro:content';
 import { absUrl } from '../../data/site';
 
-const projects = await getCollection('projects');
+const projects = await getCollection('projects', ({ data }) => !data.draft);
 
 // Generate ItemList schema for portfolio
 const projectsListSchema = projects.length > 0 ? {
